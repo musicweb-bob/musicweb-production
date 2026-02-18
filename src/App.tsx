@@ -7,7 +7,7 @@ import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
 import { Artists } from './pages/Artists';
 import { News } from './pages/News';
-import Concerts from './pages/TourSearch';
+import Concerts from './pages/toursearch';
 import { Investors } from './pages/Investors';
 import { Admin } from './pages/Admin';
 import { Marketplace } from './pages/Marketplace';
@@ -26,7 +26,7 @@ function AppContent() {
         <Route index element={<Home />} />
         <Route path="artists" element={<Artists onNavigate={handleNavigate} />} />
         <Route path="news" element={<News />} />
-        <Route path="concerts" element={<Concerts />} />
+        <Route path="concerts" element={<TourSearch />} />
         <Route path="streaming" element={<Streaming onNavigate={handleNavigate} />} />
         <Route path="marketplace" element={<Marketplace onNavigate={handleNavigate} />} />
         <Route path="investors" element={<Investors onNavigate={handleNavigate} />} />
