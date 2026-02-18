@@ -3,10 +3,11 @@ import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Layout } from './components/Layout';
 
-// PAGES (Correcting Named vs Default Imports)
+// PAGES
 import { Home } from './pages/Home';
 import { Artists } from './pages/Artists';
 import { News } from './pages/News';
+import TourSearch from './pages/TourSearch'; // Importing the new file
 import { Investors } from './pages/Investors';
 import { Admin } from './pages/Admin';
 import { Marketplace } from './pages/Marketplace';
@@ -25,6 +26,8 @@ function AppContent() {
         <Route index element={<Home />} />
         <Route path="artists" element={<Artists onNavigate={handleNavigate} />} />
         <Route path="news" element={<News />} />
+        {/* Mapping the 'concerts' URL to the TourSearch component */}
+        <Route path="concerts" element={<TourSearch />} />
         <Route path="streaming" element={<Streaming onNavigate={handleNavigate} />} />
         <Route path="marketplace" element={<Marketplace onNavigate={handleNavigate} />} />
         <Route path="investors" element={<Investors onNavigate={handleNavigate} />} />
