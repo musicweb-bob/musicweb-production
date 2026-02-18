@@ -1,4 +1,4 @@
-import React from 'react';
+import Concerts from './pages/TourSearch';import React from 'react';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Layout } from './components/Layout';
@@ -7,7 +7,7 @@ import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
 import { Artists } from './pages/Artists';
 import { News } from './pages/News';
-import Concerts from './pages/Concerts';
+import Concerts from './pages/TourSearch';
 import { Investors } from './pages/Investors';
 import { Admin } from './pages/Admin';
 import { Marketplace } from './pages/Marketplace';
