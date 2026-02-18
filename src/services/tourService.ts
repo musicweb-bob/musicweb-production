@@ -1,7 +1,5 @@
 import { Ticket, MapPin, Calendar } from 'lucide-react';
 
-// 1. Define the Shape of a Concert Event
-// We keep your interface exactly as is to prevent errors.
 export interface StandardEvent {
   id: string;
   artist: string;
@@ -12,62 +10,46 @@ export interface StandardEvent {
   status: 'available' | 'sold_out' | 'limited';
 }
 
-// 2. The "Brain" Function
-export const fetchGlobalTours = async (query: string): Promise<StandardEvent[]> => {
-  console.log(`Searching for: ${query}`);
+export const fetchGlobalTours = async (artistName: string): Promise<StandardEvent[]> => {
+  // 1. Clean the input
+  const cleanName = artistName.trim();
+  if (!cleanName) return [];
 
-  // Simulate a network delay so it feels real (0.8 seconds)
-  await new Promise(resolve => setTimeout(resolve, 800));
+  console.log(`Searching Bandsintown for: ${cleanName}`);
 
-  // --- MOCK DATA ---
-  // This is the "Safety Data" that will force the cards to appear.
-  const mockData: StandardEvent[] = [
-    {
-      id: '101',
-      artist: 'Taylor Swift',
-      date: '2025-10-18',
-      venue: 'Hard Rock Stadium',
-      location: 'Miami, FL',
-      ticketUrl: 'https://ticketmaster.com',
-      status: 'available'
-    },
-    {
-      id: '102',
-      artist: 'Taylor Swift',
-      date: '2025-10-25',
-      venue: 'Caesars Superdome',
-      location: 'New Orleans, LA',
-      ticketUrl: 'https://ticketmaster.com',
-      status: 'available'
-    },
-    {
-      id: '103',
-      artist: 'Taylor Swift',
-      date: '2025-11-01',
-      venue: 'Lucas Oil Stadium',
-      location: 'Indianapolis, IN',
-      ticketUrl: 'https://ticketmaster.com',
-      status: 'sold_out'
-    },
-    {
-      id: '104',
-      artist: 'Taylor Swift',
-      date: '2025-11-14',
-      venue: 'Rogers Centre',
-      location: 'Toronto, ON',
-      ticketUrl: 'https://ticketmaster.com',
-      status: 'available'
-    },
-    {
-      id: '105',
-      artist: 'Taylor Swift',
-      date: '2025-12-06',
-      venue: 'BC Place',
-      location: 'Vancouver, BC',
-      ticketUrl: 'https://ticketmaster.com',
-      status: 'limited'
+  // 2. USE THE PUBLIC TEST ID (No sign-up required)
+  // We use "123" or "test" as the app_id, which is allowed for public display
+  const APP_ID = 'musicweb_public_test'; 
+  const URL = `https://rest.bandsintown.com/artists/${encodeURIComponent(cleanName)}/events?app_id=${APP_ID}`;
+
+  try {
+    const response = await fetch(URL);
+
+    if (!response.ok) {
+      console.error("Bandsintown API Error:", response.status);
+      return [];
     }
-  ];
 
-  return mockData;
+    const data = await response.json();
+
+    // 3. If no artist found or no events, return empty
+    if (!Array.isArray(data)) {
+      return []; 
+    }
+
+    // 4. Map the REAL data to our design
+    return data.map((event: any) => ({
+      id: event.id,
+      artist: cleanName,
+      date: event.datetime,
+      venue: event.venue.name,
+      location: `${event.venue.city}, ${event.venue.country}`,
+      ticketUrl: event.offers?.[0]?.url || `https://www.google.com/search?q=${cleanName}+tickets`,
+      status: event.offers?.[0]?.status === 'available' ? 'available' : 'sold_out'
+    }));
+
+  } catch (error) {
+    console.error("Connection Failed:", error);
+    return [];
+  }
 };
