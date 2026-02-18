@@ -1,4 +1,4 @@
-import { StandardEvent } from '../types'; // Adjust if needed
+import { StandardEvent } from '../types';
 
 export interface StandardEvent {
   id: string;
@@ -14,19 +14,21 @@ export const fetchGlobalTours = async (artistName: string): Promise<StandardEven
   const cleanName = artistName.trim();
   if (!cleanName) return [];
 
-  // THE PROXY: This is the tunnel we discussed yesterday to bypass the Mac's browser block.
-  const PROXY = "https://api.allorigins.win/get?url=";
+  // Bypassing the broken AllOrigins proxy with a direct, secure bridge
+  const PROXY = "https://cors-anywhere.herokuapp.com/";
   const BANDS_URL = `https://rest.bandsintown.com/artists/${encodeURIComponent(cleanName)}/events?app_id=musicweb_v2`;
 
   try {
-    const response = await fetch(PROXY + encodeURIComponent(BANDS_URL));
+    // We fetch directly from the bridge
+    const response = await fetch(PROXY + BANDS_URL, {
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    });
     
-    if (!response.ok) throw new Error("Network response was not ok");
+    if (!response.ok) throw new Error("Bridge connection failed");
     
-    const wrapper = await response.json();
-    // AllOrigins returns the data as a string inside 'contents', so we parse it.
-    const data = JSON.parse(wrapper.contents); 
-
+    const data = await response.json();
     if (!Array.isArray(data)) return [];
 
     return data.map((event: any) => ({
@@ -40,7 +42,7 @@ export const fetchGlobalTours = async (artistName: string): Promise<StandardEven
     }));
 
   } catch (error) {
-    console.error("Proxy Connection Failed:", error);
+    console.error("Tour Engine Sync Error:", error);
     return [];
   }
 };
