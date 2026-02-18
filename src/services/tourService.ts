@@ -1,5 +1,3 @@
-import { StandardEvent } from '../types';
-
 export interface StandardEvent {
   id: string;
   artist: string;
@@ -14,19 +12,11 @@ export const fetchGlobalTours = async (artistName: string): Promise<StandardEven
   const cleanName = artistName.trim();
   if (!cleanName) return [];
 
-  // Bypassing the broken AllOrigins proxy with a direct, secure bridge
-  const PROXY = "https://cors-anywhere.herokuapp.com/";
-  const BANDS_URL = `https://rest.bandsintown.com/artists/${encodeURIComponent(cleanName)}/events?app_id=musicweb_v2`;
-
   try {
-    // We fetch directly from the bridge
-    const response = await fetch(PROXY + BANDS_URL, {
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest'
-      }
-    });
+    // Calling your NEW Vercel serverless bridge
+    const response = await fetch(`/api/tours?artist=${encodeURIComponent(cleanName)}`);
     
-    if (!response.ok) throw new Error("Bridge connection failed");
+    if (!response.ok) throw new Error("Server bridge error");
     
     const data = await response.json();
     if (!Array.isArray(data)) return [];
@@ -42,7 +32,7 @@ export const fetchGlobalTours = async (artistName: string): Promise<StandardEven
     }));
 
   } catch (error) {
-    console.error("Tour Engine Sync Error:", error);
+    console.error("The Server Bridge is not responding:", error);
     return [];
   }
 };
