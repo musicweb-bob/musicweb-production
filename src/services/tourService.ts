@@ -14,10 +14,9 @@ export const fetchGlobalTours = async (artistName: string): Promise<StandardEven
   const cleanName = artistName.trim();
   if (!cleanName) return [];
 
-  console.log(`Frontend searching via Vercel Bridge for: ${cleanName}`);
+  console.log(`Searching via Vercel Bridge for: ${cleanName}`);
 
   try {
-    // This calls the api/tours.ts bridge we created
     const response = await fetch(`/api/tours?artist=${encodeURIComponent(cleanName)}`);
     
     if (!response.ok) {
@@ -27,18 +26,16 @@ export const fetchGlobalTours = async (artistName: string): Promise<StandardEven
 
     const data = await response.json();
 
-    // Bandsintown returns an array of events
     if (!Array.isArray(data)) {
       console.log("No event array found for this artist.");
       return []; 
     }
 
-    // Map the REAL data to our professional UI components
     return data.map((event: any) => ({
       id: event.id.toString(),
       artist: cleanName,
-      date: event.datetime, // ISO string format
-      venue: event.venue?.name || 'TBA',
+      date: event.datetime,
+      venue: event.venue?.name || 'Venue TBA',
       location: `${event.venue?.city || ''}, ${event.venue?.country || ''}`,
       ticketUrl: event.offers?.[0]?.url || event.url,
       status: event.offers?.[0]?.status === 'available' ? 'available' : 'sold_out'
