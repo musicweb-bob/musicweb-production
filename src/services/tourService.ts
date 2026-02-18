@@ -13,26 +13,31 @@ export const fetchGlobalTours = async (artistName: string): Promise<StandardEven
   if (!cleanName) return [];
 
   try {
-    // Calling your NEW Vercel serverless bridge
+    // Calling your Vercel serverless bridge directly
     const response = await fetch(`/api/tours?artist=${encodeURIComponent(cleanName)}`);
     
-    if (!response.ok) throw new Error("Server bridge error");
+    if (!response.ok) {
+      console.error(`Bridge Error: ${response.status}`);
+      return [];
+    }
     
     const data = await response.json();
+
+    // Map the real data from the bridge to your design
     if (!Array.isArray(data)) return [];
 
     return data.map((event: any) => ({
       id: event.id,
       artist: cleanName,
       date: event.datetime,
-      venue: event.venue.name,
-      location: `${event.venue.city}, ${event.venue.country}`,
+      venue: event.venue?.name || 'Venue TBA',
+      location: `${event.venue?.city || ''}, ${event.venue?.country || ''}`,
       ticketUrl: event.offers?.[0]?.url || event.url,
       status: event.offers?.[0]?.status === 'available' ? 'available' : 'sold_out'
     }));
 
   } catch (error) {
-    console.error("The Server Bridge is not responding:", error);
+    console.error("Connection Failure:", error);
     return [];
   }
 };
