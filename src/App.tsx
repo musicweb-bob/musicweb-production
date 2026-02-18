@@ -7,7 +7,7 @@ import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
 import { Artists } from './pages/Artists';
 import { News } from './pages/News';
-import Concerts from './pages/toursearch';
+import TourSearch from './pages/TourSearch';
 import { Investors } from './pages/Investors';
 import { Admin } from './pages/Admin';
 import { Marketplace } from './pages/Marketplace';
