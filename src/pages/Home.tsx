@@ -6,8 +6,8 @@ export const Home = () => {
   return (
     <div className="min-h-screen bg-black text-white">
       
-      {/* HERO SECTION - Reduced padding from pt-40 to pt-16 to pull content up by ~1 inch */}
-      <section className="relative w-full flex flex-col items-center justify-center pt-16 pb-0 px-6 border-b border-transparent">
+      {/* HERO SECTION - Reduced padding from pt-16 to pt-4 to pull content up by exactly ~0.5 inch (48px) */}
+      <section className="relative w-full flex flex-col items-center justify-center pt-4 pb-0 px-6 border-b border-transparent">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img 
@@ -20,11 +20,11 @@ export const Home = () => {
 
         {/* Main Content */}
         <div className="relative z-10 text-center max-w-5xl mx-auto">
-          {/* LOGO: Reduced size by exactly 10% (from 9xl/8rem down to 7.2rem) */}
-          <h1 className="text-6xl md:text-[7.2rem] font-black tracking-tighter mb-6 leading-none drop-shadow-2xl">
+          {/* LOGO: Reduced size by ~25% (down to 5.5rem on desktop, 5xl on mobile) */}
+          <h1 className="text-5xl md:text-[5.5rem] font-black tracking-tighter mb-6 leading-none drop-shadow-2xl">
             <span className="italic">MUSIC</span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600">web</span>
-            <sup className="text-3xl md:text-[2.7rem] ml-1">&reg;</sup>
+            <sup className="text-2xl md:text-[2rem] ml-1">&reg;</sup>
           </h1>
           <p className="text-lg md:text-xl font-black uppercase tracking-[0.5em] text-zinc-400 mb-10">
             The Universal Hub for Sound & Gear
@@ -45,8 +45,8 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* THE MUSICweb® SEO ADVANTAGE - Reduced margin from mt-24 to mt-10 to tighten dead space */}
-      <section className="px-6 relative z-10 mt-10 mb-24">
+      {/* THE MUSICweb® SEO ADVANTAGE - Reduced margin from mt-10 to mt-2 to pull the lower section up as well */}
+      <section className="px-6 relative z-10 mt-2 mb-24">
         <div className="max-w-7xl mx-auto">
           <div className="relative border border-zinc-800 bg-black rounded-[3rem] p-12 md:p-20 overflow-hidden shadow-2xl">
             
