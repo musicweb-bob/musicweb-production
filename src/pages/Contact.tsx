@@ -100,7 +100,7 @@ export function Contact() {
                 <div className="pt-10 border-t border-white/5">
                   <p className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-3">Partnerships</p>
                   <a href="mailto:service@musicweb.com" className="text-2xl md:text-4xl font-black text-white hover:text-purple-500 transition-colors block tracking-tight">
-                    partners@musicweb.com
+                    service@musicweb.com
                   </a>
                 </div>
               </div>
