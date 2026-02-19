@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShoppingBag, Music, Globe, Zap, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { SEO } from '../components/SEO';
 
 export const Home = () => {
@@ -13,7 +14,7 @@ export const Home = () => {
           <img 
             src="https://images.unsplash.com/photo-1514525253361-bee8718a74a2?auto=format&fit=crop&q=80&w=2000" 
             className="w-full h-full object-cover opacity-30 grayscale"
-            alt="" /* Removed the ghost text here */
+            alt="" 
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/60 to-black"></div>
         </div>
@@ -30,21 +31,26 @@ export const Home = () => {
           </p>
           
           <div className="flex flex-wrap justify-center gap-6">
-            <button 
+            {/* LIVE BUTTON: Routes to Marketplace */}
+            <Link 
+              to="/marketplace"
               className="bg-white text-black px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-orange-500 hover:text-white transition-all transform hover:scale-105 flex items-center gap-3 shadow-2xl"
             >
               <ShoppingBag size={20} /> Shop Marketplace
-            </button>
-            <button 
+            </Link>
+            
+            {/* LIVE BUTTON: Routes to Streaming */}
+            <Link 
+              to="/streaming"
               className="bg-zinc-900 border border-zinc-700 text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest hover:border-purple-500 hover:bg-zinc-800 transition-all flex items-center gap-3 shadow-2xl"
             >
               <Music size={20} /> Stream Digital
-            </button>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* THE MUSICweb® SEO ADVANTAGE - Changed to mt-6 for a precise 0.25 inch drop */}
+      {/* THE MUSICweb® SEO ADVANTAGE */}
       <section className="px-6 relative z-10 mt-6 mb-24">
         <div className="max-w-7xl mx-auto">
           <div className="relative border border-zinc-800 bg-black rounded-[3rem] p-12 md:p-20 overflow-hidden shadow-2xl">
