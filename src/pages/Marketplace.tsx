@@ -40,9 +40,9 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadMode, setUploadMode] = useState<'smart' | 'csv'>('smart');
 
-  // --- 1. FILTER LISTENER (RESTORED & STRENGTHENED) ---
+  // --- 1. FILTER LISTENER (ROUTING ENGINE - FIXED) ---
   useEffect(() => {
-    // We check BOTH the incoming prop AND the actual URL path to be 100% sure
+    // We check BOTH the incoming prop AND the actual URL path to ensure the dropdown works
     const path = window.location.pathname;
     
     if (initialFilter === 'marketplace-vinyl' || path.includes('marketplace-vinyl')) {
@@ -58,7 +58,8 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
       const hash = window.location.hash.replace('#', '');
       setActiveFilter(hash || null);
     }
-  }, [initialFilter, window.location.pathname]); // Re-run if path changes
+    // Added window.location.pathname to the dependency array so it re-runs when you click the dropdown
+  }, [initialFilter, window.location.pathname]);
 
   // --- 2. DATA FETCHING ---
   useEffect(() => {
