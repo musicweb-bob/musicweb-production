@@ -61,11 +61,12 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             
             {isMarketplaceOpen && (
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-56 bg-[#1a1d2e] border border-zinc-700 rounded-xl shadow-2xl overflow-hidden flex flex-col py-2 z-50">
+                {/* THE FIX: Reverted to the bulletproof Hash routing system from 6 days ago */}
                 <button onClick={() => handleNavigate('marketplace')} className="text-left px-6 py-3 text-[11px] font-bold text-zinc-300 hover:bg-white/5 hover:text-white transition-colors">Shop All</button>
-                <button onClick={() => handleNavigate('marketplace-vinyl')} className="text-left px-6 py-3 text-[11px] font-bold text-zinc-300 hover:bg-white/5 hover:text-white transition-colors">Vinyl & CDs</button>
-                <button onClick={() => handleNavigate('marketplace-gear')} className="text-left px-6 py-3 text-[11px] font-bold text-zinc-300 hover:bg-white/5 hover:text-white transition-colors">Instruments & Gear</button>
-                <button onClick={() => handleNavigate('marketplace-memorabilia')} className="text-left px-6 py-3 text-[11px] font-bold text-zinc-300 hover:bg-white/5 hover:text-white transition-colors">Memorabilia</button>
-                <button onClick={() => handleNavigate('marketplace-books')} className="text-left px-6 py-3 text-[11px] font-bold text-zinc-300 hover:bg-white/5 hover:text-white transition-colors">Books</button>
+                <button onClick={() => handleNavigate('marketplace#vinyl')} className="text-left px-6 py-3 text-[11px] font-bold text-zinc-300 hover:bg-white/5 hover:text-white transition-colors">Vinyl & CDs</button>
+                <button onClick={() => handleNavigate('marketplace#gear')} className="text-left px-6 py-3 text-[11px] font-bold text-zinc-300 hover:bg-white/5 hover:text-white transition-colors">Instruments & Gear</button>
+                <button onClick={() => handleNavigate('marketplace#memorabilia')} className="text-left px-6 py-3 text-[11px] font-bold text-zinc-300 hover:bg-white/5 hover:text-white transition-colors">Memorabilia</button>
+                <button onClick={() => handleNavigate('marketplace#books')} className="text-left px-6 py-3 text-[11px] font-bold text-zinc-300 hover:bg-white/5 hover:text-white transition-colors">Books</button>
               </div>
             )}
           </div>
