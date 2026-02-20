@@ -40,23 +40,25 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadMode, setUploadMode] = useState<'smart' | 'csv'>('smart');
 
-  // --- 1. FILTER LISTENER (ROUTING ENGINE) ---
+  // --- 1. FILTER LISTENER (RESTORED & STRENGTHENED) ---
   useEffect(() => {
-    // Listen for incoming props from App.tsx switching pages
-    if (initialFilter === 'marketplace-vinyl') {
+    // We check BOTH the incoming prop AND the actual URL path to be 100% sure
+    const path = window.location.pathname;
+    
+    if (initialFilter === 'marketplace-vinyl' || path.includes('marketplace-vinyl')) {
       setActiveFilter('media-section');
-    } else if (initialFilter === 'marketplace-gear') {
+    } else if (initialFilter === 'marketplace-gear' || path.includes('marketplace-gear')) {
       setActiveFilter('instruments-gear');
-    } else if (initialFilter === 'marketplace-memorabilia') {
+    } else if (initialFilter === 'marketplace-memorabilia' || path.includes('marketplace-memorabilia')) {
       setActiveFilter('memorabilia-section');
-    } else if (initialFilter === 'marketplace-books') {
+    } else if (initialFilter === 'marketplace-books' || path.includes('marketplace-books')) {
       setActiveFilter('books-section');
     } else {
       // Fallback to URL hash if direct prop isn't used
       const hash = window.location.hash.replace('#', '');
       setActiveFilter(hash || null);
     }
-  }, [initialFilter]);
+  }, [initialFilter, window.location.pathname]); // Re-run if path changes
 
   // --- 2. DATA FETCHING ---
   useEffect(() => {
