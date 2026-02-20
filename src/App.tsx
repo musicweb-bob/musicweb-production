@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { Layout } from './components/Layout';
@@ -19,6 +19,14 @@ import { Reviews } from './pages/Reviews';
 function AppContent() {
   const navigate = useNavigate();
   const handleNavigate = (page: string) => navigate(page === 'home' ? '/' : `/${page}`);
+
+  // --- VISITOR TRACKING (CLEAN SWEEP STEP 2) ---
+  useEffect(() => {
+    // Only count if it's NOT the owner (prevents self-inflation of numbers)
+    if (!localStorage.getItem('mw_identity_owner')) {
+      fetch('/api/stats', { method: 'POST' }).catch(() => {});
+    }
+  }, []);
 
   return (
     <Routes>
