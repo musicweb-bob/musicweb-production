@@ -40,7 +40,7 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadMode, setUploadMode] = useState<'smart' | 'csv'>('smart');
 
-  // --- 1. FILTER LISTENER (ROUTING ENGINE - FIXED) ---
+  // --- 1. FILTER LISTENER (ROUTING ENGINE - RESTORED & FIXED) ---
   useEffect(() => {
     // We check BOTH the incoming prop AND the actual URL path to ensure the dropdown works
     const path = window.location.pathname;
@@ -58,7 +58,7 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
       const hash = window.location.hash.replace('#', '');
       setActiveFilter(hash || null);
     }
-    // Added window.location.pathname to the dependency array so it re-runs when you click the dropdown
+    // Watch for both the filter prop and the browser path changing
   }, [initialFilter, window.location.pathname]);
 
   // --- 2. DATA FETCHING ---
