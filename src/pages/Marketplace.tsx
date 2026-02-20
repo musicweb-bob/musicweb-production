@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom'; 
 import { 
   ExternalLink, 
   CheckCircle, 
@@ -30,8 +29,8 @@ interface MarketplaceProps {
 }
 
 export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
-  const location = useLocation(); 
   const [items, setItems] = useState<MarketplaceItem[]>([]);
+  const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [isMobileModalOpen, setIsMobileModalOpen] = useState(false);
   
   // --- UNIVERSAL SUBMISSION STATE ---
@@ -41,14 +40,42 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadMode, setUploadMode] = useState<'smart' | 'csv'>('smart');
 
-  // --- 1. THE FIX: INSTANT DERIVED FILTER (NO DELAYED STATE) ---
-  const path = location.pathname;
-  const currentFilter = 
-    (initialFilter === 'marketplace-vinyl' || path.includes('marketplace-vinyl')) ? 'media-section' :
-    (initialFilter === 'marketplace-gear' || path.includes('marketplace-gear')) ? 'instruments-gear' :
-    (initialFilter === 'marketplace-memorabilia' || path.includes('marketplace-memorabilia')) ? 'memorabilia-section' :
-    (initialFilter === 'marketplace-books' || path.includes('marketplace-books')) ? 'books-section' : 
-    null;
+  // --- 1. THE BRUTE-FORCE FILTER LISTENER (THE FIX) ---
+  useEffect(() => {
+    const checkUrlAndFilter = () => {
+      const path = window.location.pathname.toLowerCase();
+      const hash = window.location.hash.toLowerCase();
+
+      if (initialFilter === 'marketplace-vinyl' || path.includes('vinyl') || hash.includes('media')) {
+        setActiveFilter('media-section');
+      } else if (initialFilter === 'marketplace-gear' || path.includes('gear') || hash.includes('instrument')) {
+        setActiveFilter('instruments-gear');
+      } else if (initialFilter === 'marketplace-memorabilia' || path.includes('memorabilia') || hash.includes('memorabilia')) {
+        setActiveFilter('memorabilia-section');
+      } else if (initialFilter === 'marketplace-books' || path.includes('book') || hash.includes('book')) {
+        setActiveFilter('books-section');
+      } else {
+        setActiveFilter(null);
+      }
+    };
+
+    // Run immediately on load
+    checkUrlAndFilter();
+
+    // Listen to standard browser navigation (Back/Forward arrows)
+    window.addEventListener('popstate', checkUrlAndFilter);
+    window.addEventListener('hashchange', checkUrlAndFilter);
+
+    // BRUTE FORCE: Checks the address bar every 100ms. 
+    // If the dropdown changes the URL without a page reload, this catches it instantly.
+    const intervalId = setInterval(checkUrlAndFilter, 100);
+
+    return () => {
+      window.removeEventListener('popstate', checkUrlAndFilter);
+      window.removeEventListener('hashchange', checkUrlAndFilter);
+      clearInterval(intervalId);
+    };
+  }, [initialFilter]);
 
   // --- 2. DATA FETCHING ---
   useEffect(() => {
@@ -269,9 +296,9 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
     <div className="min-h-screen bg-black text-white pt-32 pb-24 px-8 relative w-full selection:bg-purple-500/30">
       {/* --- HEADER ACTIONS --- */}
       <div className="absolute top-28 right-8 z-50 flex gap-3">
-        {currentFilter && (
+        {activeFilter && (
           <button 
-            onClick={() => onNavigate('marketplace')} 
+            onClick={() => { onNavigate('marketplace'); setActiveFilter(null); }} 
             className="bg-white text-black px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl hover:bg-orange-500 hover:text-white transition-all transform hover:-translate-y-0.5"
           >
             Show All Items
@@ -303,8 +330,7 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
         {/* --- INVENTORY GRID AREA --- */}
         <div className="flex-1 w-full space-y-24">
           {sections.map((section) => {
-            // THE RENDER LOCK: Completely ignores sections that don't match the current filter
-            if (currentFilter && currentFilter !== section.id) return null;
+            if (activeFilter && activeFilter !== section.id) return null;
             
             const sectionItems = getItemsByCategory(section.key);
             if (sectionItems.length === 0) return null;
