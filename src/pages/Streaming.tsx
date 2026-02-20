@@ -7,12 +7,11 @@ export function Streaming({ onNavigate }: { onNavigate?: (page: string) => void 
   const [submitStatus, setSubmitStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // 1. SOUNDCLOUD EMBED STATE (Stores user submissions)
+  // 1. SOUNDCLOUD EMBED STATE 
   const [soundCloudLinks, setSoundCloudLinks] = useState<string[]>(() => {
     const saved = localStorage.getItem('mw_sc_links');
     return saved ? JSON.parse(saved) : [
-      "https://soundcloud.com/lofi-beats/tuesday",
-      "https://soundcloud.com/monstercat/pegboard-nerds-swamp-thing"
+      "https://soundcloud.com/monstercat/pegboard-nerds-swamp-thing" // Working default
     ];
   });
 
@@ -20,12 +19,11 @@ export function Streaming({ onNavigate }: { onNavigate?: (page: string) => void 
   const [liveTracks, setLiveTracks] = useState<any[]>([]);
   const [isLoadingFeed, setIsLoadingFeed] = useState(true);
 
-  // Fetch live tracks on load
+  // Fetch live tracks on load (Changed search term to "top hits" to avoid literal "new music" matches)
   useEffect(() => {
     const fetchLiveMusic = async () => {
       try {
-        // Grabbing recent popular tracks using iTunes public API
-        const response = await fetch('https://itunes.apple.com/search?term=new+music&entity=song&limit=8');
+        const response = await fetch('https://itunes.apple.com/search?term=billboard+hits&entity=song&limit=8');
         const data = await response.json();
         setLiveTracks(data.results);
       } catch (error) {
@@ -51,10 +49,14 @@ export function Streaming({ onNavigate }: { onNavigate?: (page: string) => void 
     setTimeout(() => {
       const newLinks = [musicLink, ...soundCloudLinks];
       setSoundCloudLinks(newLinks);
-      localStorage.setItem('mw_sc_links', JSON.stringify(newLinks)); // Save to local storage for testing
+      localStorage.setItem('mw_sc_links', JSON.stringify(newLinks)); 
+      
       setIsSubmitting(false);
       setSubmitStatus('Track Live on MusicWeb!');
+      
+      // Clear both input fields completely
       setMusicLink('');
+      setSubmitEmail('');
       
       // Clear success message after 3 seconds
       setTimeout(() => setSubmitStatus(''), 3000);
@@ -74,7 +76,8 @@ export function Streaming({ onNavigate }: { onNavigate?: (page: string) => void 
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/80 to-[#0a0c14]"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto">
+      {/* Removed the max-w-7xl constraint here to let the layout span wide */}
+      <div className="relative z-10 w-full">
         
         {/* HEADER */}
         <div className="w-full text-center mb-16">
@@ -93,7 +96,7 @@ export function Streaming({ onNavigate }: { onNavigate?: (page: string) => void 
 
         <div className="w-full flex flex-col lg:flex-row gap-10 items-start">
           
-          {/* LEFT SIDEBAR: THE SUBMISSION BOX */}
+          {/* LEFT SIDEBAR: THE SUBMISSION BOX (Now hugs the left edge) */}
           <div className="w-full lg:w-80 flex-shrink-0 lg:sticky lg:top-32 self-start z-20">
             <div className="bg-zinc-900/70 rounded-[2.5rem] p-1 border border-white/10 shadow-2xl backdrop-blur-xl">
               <div className="bg-black/50 rounded-[2.3rem] p-8 border border-white/5 space-y-6">
@@ -174,26 +177,5 @@ export function Streaming({ onNavigate }: { onNavigate?: (page: string) => void 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {liveTracks.map((track, index) => (
                     <div key={index} className="bg-[#111] border border-white/5 rounded-2xl p-4 flex gap-4 hover:border-pink-500/50 transition-colors group">
-                      {/* High-res Album Art Trick (replacing 100x100 with 400x400 in the URL) */}
                       <img 
-                        src={track.artworkUrl100.replace('100x100bb', '400x400bb')} 
-                        alt="Album Art" 
-                        className="w-24 h-24 rounded-lg object-cover shadow-lg group-hover:scale-105 transition-transform"
-                      />
-                      <div className="flex-1 min-w-0 flex flex-col justify-center">
-                        <h3 className="text-white font-bold truncate text-lg leading-tight mb-1">{track.trackName}</h3>
-                        <p className="text-zinc-400 text-xs font-black uppercase tracking-widest truncate mb-3">{track.artistName}</p>
-                        <audio controls src={track.previewUrl} className="w-full h-8 opacity-70 group-hover:opacity-100 transition-opacity"></audio>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </section>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
+                        src={track.artworkUrl100.replace('100x100
