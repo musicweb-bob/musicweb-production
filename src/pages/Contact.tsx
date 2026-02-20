@@ -115,8 +115,8 @@ export function Contact() {
                 
                 <div>
                   <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-1">Investor Relations</p>
-                  <a href="mailto:investors@musicweb.com" className="text-2xl text-white hover:text-pink-400 transition-colors font-medium">
-                    investors@musicweb.com
+                  <a href="mailto:service@musicweb.com" className="text-2xl text-white hover:text-pink-400 transition-colors font-medium">
+                    service@musicweb.com
                   </a>
                 </div>
               </div>
