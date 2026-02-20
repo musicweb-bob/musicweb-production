@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { 
   ExternalLink, 
   CheckCircle, 
@@ -29,6 +30,7 @@ interface MarketplaceProps {
 }
 
 export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
+  const location = useLocation();
   const [items, setItems] = useState<MarketplaceItem[]>([]);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [isMobileModalOpen, setIsMobileModalOpen] = useState(false);
@@ -40,42 +42,23 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadMode, setUploadMode] = useState<'smart' | 'csv'>('smart');
 
-  // --- 1. THE BRUTE-FORCE FILTER LISTENER (THE FIX) ---
+  // --- 1. FILTER LISTENER (RESTORED FROM 6 DAYS AGO) ---
   useEffect(() => {
-    const checkUrlAndFilter = () => {
-      const path = window.location.pathname.toLowerCase();
-      const hash = window.location.hash.toLowerCase();
-
-      if (initialFilter === 'marketplace-vinyl' || path.includes('vinyl') || hash.includes('media')) {
-        setActiveFilter('media-section');
-      } else if (initialFilter === 'marketplace-gear' || path.includes('gear') || hash.includes('instrument')) {
-        setActiveFilter('instruments-gear');
-      } else if (initialFilter === 'marketplace-memorabilia' || path.includes('memorabilia') || hash.includes('memorabilia')) {
-        setActiveFilter('memorabilia-section');
-      } else if (initialFilter === 'marketplace-books' || path.includes('book') || hash.includes('book')) {
-        setActiveFilter('books-section');
-      } else {
-        setActiveFilter(null);
-      }
-    };
-
-    // Run immediately on load
-    checkUrlAndFilter();
-
-    // Listen to standard browser navigation (Back/Forward arrows)
-    window.addEventListener('popstate', checkUrlAndFilter);
-    window.addEventListener('hashchange', checkUrlAndFilter);
-
-    // BRUTE FORCE: Checks the address bar every 100ms. 
-    // If the dropdown changes the URL without a page reload, this catches it instantly.
-    const intervalId = setInterval(checkUrlAndFilter, 100);
-
-    return () => {
-      window.removeEventListener('popstate', checkUrlAndFilter);
-      window.removeEventListener('hashchange', checkUrlAndFilter);
-      clearInterval(intervalId);
-    };
-  }, [initialFilter]);
+    // We are back to the exact system that worked: listening to Hashes
+    const hash = location.hash.replace('#', '');
+    
+    if (hash === 'vinyl') {
+      setActiveFilter('media-section');
+    } else if (hash === 'gear') {
+      setActiveFilter('instruments-gear');
+    } else if (hash === 'memorabilia') {
+      setActiveFilter('memorabilia-section');
+    } else if (hash === 'books') {
+      setActiveFilter('books-section');
+    } else {
+      setActiveFilter(null);
+    }
+  }, [location.hash]); // Triggers instantly when dropdown is clicked
 
   // --- 2. DATA FETCHING ---
   useEffect(() => {
