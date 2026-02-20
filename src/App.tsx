@@ -7,7 +7,7 @@ import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
 import { Artists } from './pages/Artists';
 import { News } from './pages/News';
-import TourSearch from './pages/TourSearch'; // Importing the new file
+import TourSearch from './pages/TourSearch'; 
 import { Investors } from './pages/Investors';
 import { Admin } from './pages/Admin';
 import { Marketplace } from './pages/Marketplace';
@@ -20,9 +20,9 @@ function AppContent() {
   const navigate = useNavigate();
   const handleNavigate = (page: string) => navigate(page === 'home' ? '/' : `/${page}`);
 
-  // --- VISITOR TRACKING (CLEAN SWEEP STEP 2) ---
+  // --- VISITOR TRACKING ---
   useEffect(() => {
-    // Only count if it's NOT the owner (prevents self-inflation of numbers)
+    // Only count if it's NOT the owner
     if (!localStorage.getItem('mw_identity_owner')) {
       fetch('/api/stats', { method: 'POST' }).catch(() => {});
     }
@@ -34,10 +34,16 @@ function AppContent() {
         <Route index element={<Home />} />
         <Route path="artists" element={<Artists onNavigate={handleNavigate} />} />
         <Route path="news" element={<News />} />
-        {/* Mapping the 'concerts' URL to the TourSearch component */}
         <Route path="concerts" element={<TourSearch />} />
         <Route path="streaming" element={<Streaming onNavigate={handleNavigate} />} />
+        
+        {/* --- RESTORED MARKETPLACE CATEGORY ROUTES --- */}
         <Route path="marketplace" element={<Marketplace onNavigate={handleNavigate} />} />
+        <Route path="marketplace-vinyl" element={<Marketplace onNavigate={handleNavigate} initialFilter="marketplace-vinyl" />} />
+        <Route path="marketplace-gear" element={<Marketplace onNavigate={handleNavigate} initialFilter="marketplace-gear" />} />
+        <Route path="marketplace-memorabilia" element={<Marketplace onNavigate={handleNavigate} initialFilter="marketplace-memorabilia" />} />
+        <Route path="marketplace-books" element={<Marketplace onNavigate={handleNavigate} initialFilter="marketplace-books" />} />
+        
         <Route path="investors" element={<Investors onNavigate={handleNavigate} />} />
         <Route path="admin" element={<Admin onNavigate={handleNavigate} />} />
         <Route path="about" element={<About />} />
