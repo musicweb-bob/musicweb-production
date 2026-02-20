@@ -22,7 +22,6 @@ function AppContent() {
 
   // --- VISITOR TRACKING ---
   useEffect(() => {
-    // Only count if it's NOT the owner
     if (!localStorage.getItem('mw_identity_owner')) {
       fetch('/api/stats', { method: 'POST' }).catch(() => {});
     }
@@ -37,7 +36,7 @@ function AppContent() {
         <Route path="concerts" element={<TourSearch />} />
         <Route path="streaming" element={<Streaming onNavigate={handleNavigate} />} />
         
-        {/* --- RESTORED MARKETPLACE CATEGORY ROUTES --- */}
+        {/* --- CATEGORY ROUTES (RESTORED & ALIGNED WITH NAVIGATION.TSX) --- */}
         <Route path="marketplace" element={<Marketplace onNavigate={handleNavigate} />} />
         <Route path="marketplace-vinyl" element={<Marketplace onNavigate={handleNavigate} initialFilter="marketplace-vinyl" />} />
         <Route path="marketplace-gear" element={<Marketplace onNavigate={handleNavigate} initialFilter="marketplace-gear" />} />
