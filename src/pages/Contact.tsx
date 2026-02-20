@@ -78,14 +78,14 @@ export function Contact() {
         {/* --- HEADER --- */}
         <div className="text-center mb-16">
           <h1 className="flex items-baseline justify-center leading-none">
-            {/* CONTACT (Italicized) */}
-            <span className="text-4xl md:text-6xl font-black italic tracking-tighter">CONTACT</span>
+            {/* CONTACT (Straight) */}
+            <span className="text-4xl md:text-6xl font-black tracking-tighter">CONTACT</span>
             
             {/* THE ARROWS (With spacing equivalent to 2 spaces on each side) */}
             <span className="text-4xl md:text-6xl font-black tracking-tighter text-gray-600 mx-5">{'>>'}</span>
             
-            {/* MUSIC */}
-            <span className="text-4xl md:text-6xl font-black tracking-tighter">MUSIC</span>
+            {/* MUSIC (Italicized) */}
+            <span className="text-4xl md:text-6xl font-black italic tracking-tighter">MUSIC</span>
             
             {/* web */}
             <span className="text-2xl md:text-4xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 ml-1">
