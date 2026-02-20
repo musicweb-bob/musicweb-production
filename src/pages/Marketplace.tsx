@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom'; // Added this to listen for route changes
+import { useLocation } from 'react-router-dom';
 import { 
   ExternalLink, 
   CheckCircle, 
@@ -30,7 +30,7 @@ interface MarketplaceProps {
 }
 
 export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
-  const location = useLocation(); // Hook to detect live URL changes from the dropdown
+  const location = useLocation();
   const [items, setItems] = useState<MarketplaceItem[]>([]);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [isMobileModalOpen, setIsMobileModalOpen] = useState(false);
@@ -42,11 +42,11 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadMode, setUploadMode] = useState<'smart' | 'csv'>('smart');
 
-  // --- 1. FILTER LISTENER (ROUTING ENGINE - RESTORED & LIVE) ---
+  // --- 1. THE FIX: LIVE ROUTE LISTENER ---
   useEffect(() => {
-    // We check BOTH the incoming prop AND the actual live URL path
     const path = location.pathname;
     
+    // Check the incoming prop OR the current URL path
     if (initialFilter === 'marketplace-vinyl' || path.includes('marketplace-vinyl')) {
       setActiveFilter('media-section');
     } else if (initialFilter === 'marketplace-gear' || path.includes('marketplace-gear')) {
@@ -56,11 +56,9 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
     } else if (initialFilter === 'marketplace-books' || path.includes('marketplace-books')) {
       setActiveFilter('books-section');
     } else {
-      // Fallback to URL hash or Show All
-      const hash = window.location.hash.replace('#', '');
-      setActiveFilter(hash || null);
+      setActiveFilter(null);
     }
-  }, [initialFilter, location.pathname]); // This triggers the SECOND the dropdown is clicked
+  }, [initialFilter, location.pathname]); // Re-runs immediately when dropdown is clicked
 
   // --- 2. DATA FETCHING ---
   useEffect(() => {
@@ -79,7 +77,6 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
       );
       setItems(sorted);
     } catch (err) {
-      // FALLBACK TO YOUR CORE INVENTORY
       setItems([
         {
           id: 30,
@@ -276,10 +273,8 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
     { title: 'Books & Publications', key: 'Books', id: 'books-section' },
   ];
 
-  // --- 5. MAIN RENDER ---
   return (
     <div className="min-h-screen bg-black text-white pt-32 pb-24 px-8 relative w-full selection:bg-purple-500/30">
-      {/* --- HEADER ACTIONS --- */}
       <div className="absolute top-28 right-8 z-50 flex gap-3">
         {activeFilter && (
           <button 
@@ -291,7 +286,6 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
         )}
       </div>
 
-      {/* --- HERO LOGO --- */}
       <div className="w-full text-center mb-16 select-none">
         <h1 className="text-6xl md:text-8xl font-black tracking-tighter flex justify-center items-start leading-none drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
           <span className="text-white italic">MUSIC</span>
@@ -302,8 +296,6 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
       </div>
 
       <div className="w-full flex flex-col lg:flex-row gap-16 items-start max-w-[1800px] mx-auto">
-        
-        {/* --- DESKTOP SIDEBAR --- */}
         <div className="hidden lg:block w-[340px] flex-shrink-0 sticky top-32">
           <div className="bg-zinc-950/80 rounded-[3rem] p-1 border border-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-2xl">
             <div className="bg-black/40 rounded-[2.8rem] p-8 border border-white/5 shadow-inner">
@@ -312,7 +304,6 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
           </div>
         </div>
 
-        {/* --- INVENTORY GRID AREA --- */}
         <div className="flex-1 w-full space-y-24">
           {sections.map((section) => {
             if (activeFilter && activeFilter !== section.id) return null;
@@ -385,7 +376,6 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
         </div>
       </div>
 
-      {/* --- MOBILE INTERFACE --- */}
       <button 
         onClick={() => setIsMobileModalOpen(true)}
         className="lg:hidden fixed bottom-8 right-8 z-50 bg-gradient-to-br from-orange-500 to-purple-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(168,85,247,0.5)] hover:scale-110 active:scale-95 transition-all"
