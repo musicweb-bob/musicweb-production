@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom'; // Added this to listen for route changes
 import { 
   ExternalLink, 
   CheckCircle, 
@@ -29,6 +30,7 @@ interface MarketplaceProps {
 }
 
 export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
+  const location = useLocation(); // Hook to detect live URL changes from the dropdown
   const [items, setItems] = useState<MarketplaceItem[]>([]);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const [isMobileModalOpen, setIsMobileModalOpen] = useState(false);
@@ -40,10 +42,10 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadMode, setUploadMode] = useState<'smart' | 'csv'>('smart');
 
-  // --- 1. FILTER LISTENER (ROUTING ENGINE - RESTORED & FIXED) ---
+  // --- 1. FILTER LISTENER (ROUTING ENGINE - RESTORED & LIVE) ---
   useEffect(() => {
-    // We check BOTH the incoming prop AND the actual URL path to ensure the dropdown works
-    const path = window.location.pathname;
+    // We check BOTH the incoming prop AND the actual live URL path
+    const path = location.pathname;
     
     if (initialFilter === 'marketplace-vinyl' || path.includes('marketplace-vinyl')) {
       setActiveFilter('media-section');
@@ -54,12 +56,11 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
     } else if (initialFilter === 'marketplace-books' || path.includes('marketplace-books')) {
       setActiveFilter('books-section');
     } else {
-      // Fallback to URL hash if direct prop isn't used
+      // Fallback to URL hash or Show All
       const hash = window.location.hash.replace('#', '');
       setActiveFilter(hash || null);
     }
-    // Watch for both the filter prop and the browser path changing
-  }, [initialFilter, window.location.pathname]);
+  }, [initialFilter, location.pathname]); // This triggers the SECOND the dropdown is clicked
 
   // --- 2. DATA FETCHING ---
   useEffect(() => {
@@ -138,7 +139,6 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
         collectedTitles.push("Failed to scout link");
       }
       
-      // Prevent rate limiting with a small delay
       await new Promise(r => setTimeout(r, 1000));
     }
     
