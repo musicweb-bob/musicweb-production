@@ -286,13 +286,6 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
             Show All Items
           </button>
         )}
-        <button 
-          onClick={() => onNavigate('admin')} 
-          className="flex items-center space-x-2 bg-zinc-900/80 backdrop-blur-md hover:bg-white hover:text-black text-zinc-400 px-5 py-2 rounded-xl border border-white/5 transition-all text-[10px] font-black uppercase tracking-widest shadow-lg"
-        >
-          <Settings size={14} />
-          <span>Dashboard</span>
-        </button>
       </div>
 
       {/* --- HERO LOGO --- */}
