@@ -34,7 +34,7 @@ export function Streaming({ onNavigate }: { onNavigate?: (page: string) => void 
 
   const fetchCommunityTracks = async () => {
     try {
-      const res = await fetch('/api/streams');
+      const res = await fetch('/api/stream');
       const data = await res.json();
       if (data.streams) setCommunityTracks(data.streams);
     } catch (err) {
@@ -69,7 +69,7 @@ export function Streaming({ onNavigate }: { onNavigate?: (page: string) => void 
     setSubmitStatus('Saving to Database...');
     
     try {
-      const res = await fetch('/api/streams', {
+      const res = await fetch('/api/stream', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ url: musicLink, email: submitEmail })
@@ -94,7 +94,7 @@ export function Streaming({ onNavigate }: { onNavigate?: (page: string) => void 
   // HANDLE ADMIN DELETE
   const removeTrack = async (id: number) => {
     try {
-      await fetch('/api/streams', {
+      await fetch('/api/stream', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id })
@@ -171,7 +171,7 @@ export function Streaming({ onNavigate }: { onNavigate?: (page: string) => void 
             <div className="flex items-baseline">
               <span className="italic text-white">MUSIC</span>
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600">web</span>
-              <sup className="text-xl md:text-3xl text-zinc-400 ml-1">&reg;</sup>
+              <sup className="text-xl md:text-3xl text-zinc-400 ml-1">®</sup>
             </div>
             <span className="text-3xl md:text-5xl font-light text-zinc-300 italic">Digital</span>
           </h1>
