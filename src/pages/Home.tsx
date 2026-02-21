@@ -1,13 +1,12 @@
 import React from 'react';
 import { ShoppingBag, Music, Globe, Zap, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { SEO } from '../components/SEO';
 
 export const Home = () => {
   return (
     <div className="min-h-screen bg-black text-white">
       
-      {/* HERO SECTION */}
+      {/* --- HERO SECTION --- */}
       <section className="relative w-full flex flex-col items-center justify-center pt-4 pb-0 px-6 border-b border-transparent">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
@@ -50,7 +49,7 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* THE MUSICweb® SEO ADVANTAGE */}
+      {/* --- THE MUSICweb® SEO ADVANTAGE --- */}
       <section className="px-6 relative z-10 mt-6 mb-24">
         <div className="max-w-7xl mx-auto">
           <div className="relative border border-zinc-800 bg-black rounded-[3rem] p-12 md:p-20 overflow-hidden shadow-2xl">
@@ -107,23 +106,6 @@ export const Home = () => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* STATS */}
-      <section className="py-20 border-t border-zinc-900 bg-black">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-12 text-center">
-          {[
-            { label: "Monthly Visitors", value: "1.2M+", color: "text-white" },
-            { label: "Inventory Items", value: "450K+", color: "text-orange-500" },
-            { label: "Artist Drops", value: "85K+", color: "text-pink-500" },
-            { label: "Music Focused", value: "100%", color: "text-purple-500" },
-          ].map((stat, i) => (
-            <div key={i} className="space-y-2">
-              <div className={`text-4xl md:text-5xl font-black ${stat.color}`}>{stat.value}</div>
-              <div className="text-[10px] font-black uppercase tracking-widest text-zinc-600">{stat.label}</div>
-            </div>
-          ))}
         </div>
       </section>
 
