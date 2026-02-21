@@ -1,37 +1,61 @@
 import { Music } from 'lucide-react';
 
 export function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-[#0d0f1a] border-t border-gray-800 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-8">
-          <div className="flex justify-center items-center mb-4">
-            <Music className="w-8 h-8 text-[#FF6B35] mr-3" strokeWidth={1.5} />
-            <h3 className="text-2xl sm:text-3xl font-bold">
-              <span className="text-white">MUSIC</span>
-              <span className="text-[#FF6B35]">web</span>
-              <span className="text-white text-lg align-super">®</span>
-            </h3>
+    <footer className="bg-[#0a0c14] border-t border-zinc-800 py-16 px-6 mt-auto">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
+        
+        {/* --- BRAND & HERITAGE --- */}
+        <div className="md:col-span-5 space-y-6 text-center md:text-left">
+          <div className="flex items-center justify-center md:justify-start gap-1 select-none">
+            <span className="text-3xl font-black italic text-white">MUSIC</span>
+            <span className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600">web</span>
+            <sup className="text-sm font-bold text-zinc-400 relative top-[-8px]">&reg;</sup>
           </div>
-          <p className="text-gray-400 text-base sm:text-lg mb-6">Connecting music lovers since 1995</p>
-
-          <div className="space-y-2 text-sm sm:text-base text-gray-400 mb-6">
-            <p><span className="text-white font-semibold">MUSICweb®</span> and <span className="text-white font-semibold">MUSIKweb®</span> are federally registered trademarks</p>
-            <p>musicweb.com and musikweb.com both registered in 1995</p>
-            <p>Founded by Bob Ellenbogen | Campus Records (1982-2000s)</p>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-6 mb-6 text-sm sm:text-base">
-            <a href="#" className="text-gray-400 hover:text-[#FF6B35] transition-colors">Marketplace</a>
-            <a href="#" className="text-gray-400 hover:text-[#FF6B35] transition-colors">Music News</a>
-            <a href="#" className="text-gray-400 hover:text-[#FF6B35] transition-colors">About</a>
-          </div>
-
-          <div className="text-gray-500 text-sm space-y-1">
-            <p>© 2025 MUSICweb®. All rights reserved.</p>
-            <p>Updated November 20, 2025</p>
-          </div>
+          <p className="text-zinc-400 text-sm font-medium leading-relaxed max-w-sm mx-auto md:mx-0">
+            A legacy of music distribution originating as Campus Records in 1982, evolving into the MUSICweb&reg; global network in 1995.
+          </p>
         </div>
+
+        {/* --- PLATFORM LINKS --- */}
+        <div className="md:col-span-3 text-center md:text-left">
+          <h4 className="text-white text-xs font-black uppercase tracking-[0.2em] mb-6">Platform</h4>
+          <ul className="space-y-4">
+            <li><a href="/marketplace" className="text-zinc-500 hover:text-orange-500 text-[11px] font-bold uppercase tracking-widest transition-colors">Marketplace</a></li>
+            <li><a href="/streaming" className="text-zinc-500 hover:text-pink-500 text-[11px] font-bold uppercase tracking-widest transition-colors">Streaming</a></li>
+            <li><a href="/news" className="text-zinc-500 hover:text-purple-500 text-[11px] font-bold uppercase tracking-widest transition-colors">Music News</a></li>
+            <li><a href="/artists" className="text-zinc-500 hover:text-white text-[11px] font-bold uppercase tracking-widest transition-colors">Artists</a></li>
+          </ul>
+        </div>
+
+        {/* --- CORPORATE LINKS --- */}
+        <div className="md:col-span-4 text-center md:text-left">
+          <h4 className="text-white text-xs font-black uppercase tracking-[0.2em] mb-6">Corporate</h4>
+          <ul className="space-y-4">
+            <li><a href="/about" className="text-zinc-500 hover:text-white text-[11px] font-bold uppercase tracking-widest transition-colors">About Us</a></li>
+            <li><a href="/investors" className="text-zinc-500 hover:text-white text-[11px] font-bold uppercase tracking-widest transition-colors">Investor Relations</a></li>
+            <li><a href="#" className="text-zinc-500 hover:text-white text-[11px] font-bold uppercase tracking-widest transition-colors">Privacy Policy</a></li>
+            <li><a href="#" className="text-zinc-500 hover:text-white text-[11px] font-bold uppercase tracking-widest transition-colors">Terms of Service</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      {/* --- COPYRIGHT BAR --- */}
+      <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-zinc-900 flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+        <div className="space-y-2">
+          <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest">
+            &copy; {currentYear} MUSICweb&reg;. All rights reserved.
+          </p>
+          <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest">
+            MUSICweb&reg; and MUSIKweb&reg; are federally registered trademarks.
+          </p>
+        </div>
+        <p className="text-zinc-600 text-[10px] font-bold uppercase tracking-widest">
+          musicweb.com &amp; musikweb.com globally registered 1995.
+        </p>
       </div>
     </footer>
   );
