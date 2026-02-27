@@ -43,7 +43,7 @@ export function Investors({ onNavigate }: InvestorsProps) {
           Open for Acquisition
         </div>
         
-        {/* MAIN TITLE - Resized to be less aggressive */}
+        {/* MAIN TITLE */}
         <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight uppercase">
           Intellectual <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Property</span>
         </h1>
@@ -56,7 +56,7 @@ export function Investors({ onNavigate }: InvestorsProps) {
       {/* --- ASSET GRIDS --- */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
         
-        {/* TRADEMARKS BOX - WITH 1996 FIRST USE & REAL SERIALS */}
+        {/* TRADEMARKS BOX - MINIMALIST PREMIUM DESIGN */}
         <div className="bg-[#111] p-10 rounded-3xl border border-white/5 relative overflow-hidden group hover:border-white/10 transition-all">
           <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
             <Shield size={120} />
@@ -68,29 +68,33 @@ export function Investors({ onNavigate }: InvestorsProps) {
           </div>
 
           <div className="space-y-6 relative z-10">
-            {/* MUSICWEB - SERIAL #75117439 */}
-            <div className="bg-[#1a1d2e] p-6 rounded-xl border border-white/5">
-              <div className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Serial #75117439</div>
-              <div className="text-3xl font-black mb-2 flex items-baseline">
+            {/* MUSICWEB */}
+            <div className="bg-[#1a1d2e] p-6 rounded-xl border border-white/5 hover:border-blue-500/30 transition-colors">
+              <div className="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-2 flex items-center gap-2">
+                <Lock size={10} /> Registration #2189729
+              </div>
+              <div className="text-3xl font-black mb-3 flex items-baseline">
                 <span style={{ fontStyle: 'italic' }}>MUSIC</span>
                 <span className="bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 bg-clip-text text-transparent">web</span>
                 <span>®</span>
               </div>
-              <p className="text-xs text-gray-400 leading-relaxed">
-                <strong className="text-white font-bold">Class 042:</strong> Computerized on-line retail services in the field of recorded music and music information. (Registered 1998, first use 1996)
+              <p className="text-sm text-zinc-400 font-medium tracking-wide">
+                <span className="text-white font-bold">Vintage: 1998</span> <span className="opacity-60 italic">(First Use: 1996)</span>
               </p>
             </div>
 
-            {/* MUSIKWEB - SERIAL #75135939 */}
-            <div className="bg-[#1a1d2e] p-6 rounded-xl border border-white/5">
-              <div className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Serial #75135939</div>
-              <div className="text-3xl font-black mb-2 flex items-baseline">
+            {/* MUSIKWEB */}
+            <div className="bg-[#1a1d2e] p-6 rounded-xl border border-white/5 hover:border-blue-500/30 transition-colors">
+              <div className="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-2 flex items-center gap-2">
+                <Lock size={10} /> Registration #2094744
+              </div>
+              <div className="text-3xl font-black mb-3 flex items-baseline">
                 <span style={{ fontStyle: 'italic' }}>MUSIK</span>
                 <span className="bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 bg-clip-text text-transparent">web</span>
                 <span>®</span>
               </div>
-              <p className="text-xs text-gray-400 leading-relaxed">
-                <strong className="text-white font-bold">Class 042:</strong> Defensive registration covering alternative spelling variations for on-line retail services. (Registered 1998, first use 1996)
+              <p className="text-sm text-zinc-400 font-medium tracking-wide">
+                <span className="text-white font-bold">Vintage: 1997</span> <span className="opacity-60 italic">(First Use: 1996)</span>
               </p>
             </div>
           </div>
