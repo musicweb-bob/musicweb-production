@@ -7,7 +7,7 @@ export const Home = () => {
     <div className="min-h-screen bg-black text-white">
       
       {/* --- HERO SECTION --- */}
-      <section className="relative w-full flex flex-col items-center justify-center pt-4 pb-0 px-6 border-b border-transparent">
+      <section className="relative w-full flex flex-col items-center justify-center pt-16 pb-0 px-6 border-b border-transparent">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img 
@@ -19,13 +19,30 @@ export const Home = () => {
         </div>
 
         {/* Main Content */}
-        <div className="relative z-10 text-center max-w-5xl mx-auto">
-          <h1 className="text-5xl md:text-[5.5rem] font-black tracking-tighter mb-6 leading-none drop-shadow-2xl">
-            <span className="italic">MUSIC</span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600">web</span>
-            <sup className="text-2xl md:text-[2rem] ml-1">&reg;</sup>
-          </h1>
-          <p className="text-lg md:text-xl font-black uppercase tracking-[0.5em] text-zinc-400 mb-10">
+        <div className="relative z-10 text-center max-w-6xl mx-auto w-full">
+          
+          {/* USPTO DUAL BRANDED HERO TITLE */}
+          <div className="flex flex-col xl:flex-row items-center justify-center gap-4 xl:gap-8 mb-8 drop-shadow-2xl">
+             
+             {/* MUSICweb */}
+             <div className="flex items-center select-none leading-none">
+               <span className="text-6xl md:text-[5.5rem] font-black italic text-white tracking-tighter">MUSIC</span>
+               <span className="text-6xl md:text-[5.5rem] font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
+               <sup className="text-2xl md:text-[2rem] font-bold text-zinc-400 relative -ml-1 top-[-15px] md:top-[-25px]">®</sup>
+             </div>
+             
+             {/* Divider */}
+             <span className="hidden xl:block text-zinc-700 text-6xl font-light pb-4">|</span>
+             
+             {/* MUSIKweb */}
+             <div className="flex items-center select-none leading-none">
+               <span className="text-6xl md:text-[5.5rem] font-black italic text-white tracking-tighter">MUSIK</span>
+               <span className="text-6xl md:text-[5.5rem] font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
+               <sup className="text-2xl md:text-[2rem] font-bold text-zinc-400 relative -ml-1 top-[-15px] md:top-[-25px]">®</sup>
+             </div>
+          </div>
+
+          <p className="text-lg md:text-xl font-black uppercase tracking-[0.5em] text-zinc-400 mb-12">
             The Universal Hub for Sound & Gear
           </p>
           
@@ -50,7 +67,7 @@ export const Home = () => {
       </section>
 
       {/* --- THE MUSICweb® SEO ADVANTAGE --- */}
-      <section className="px-6 relative z-10 mt-6 mb-24">
+      <section className="px-6 relative z-10 mt-16 mb-24">
         <div className="max-w-7xl mx-auto">
           <div className="relative border border-zinc-800 bg-black rounded-[3rem] p-12 md:p-20 overflow-hidden shadow-2xl">
             
@@ -62,7 +79,7 @@ export const Home = () => {
                 <h2 className="text-4xl md:text-6xl font-black leading-tight text-white">
                   THE <span className="italic">MUSIC</span>
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600">web</span>
-                  <sup className="text-2xl">&reg;</sup> <br/> 
+                  <sup className="text-2xl">®</sup> <br/> 
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-purple-600">ADVANTAGE</span>
                 </h2>
                 
@@ -70,7 +87,7 @@ export const Home = () => {
                   <p>
                     In a digital landscape crowded with noise, your domain is your destiny. Search engines prioritize the word <span className="text-white font-bold">MUSIC</span>, and 
                     <span className="ml-1 italic font-black text-white">MUSIC</span>
-                    <span className="italic font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600">web&reg;</span> is the exact match they’re looking for.
+                    <span className="italic font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600">web®</span> is the exact match they’re looking for.
                   </p>
                   <p>
                     By sharing your sounds and listing your gear here, you aren't just uploading data—you’re plugging into a high-authority hub designed to drive millions of visitors directly to your door.
