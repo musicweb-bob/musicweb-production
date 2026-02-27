@@ -113,7 +113,7 @@ export function Streaming({ onNavigate }: { onNavigate?: (page: string) => void 
         <div className="w-full text-center mb-16">
           
           {/* USPTO DUAL BRANDED HERO TITLE - LINE 1 */}
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-2">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
              
              {/* MUSICweb */}
              <div className="flex items-center select-none">
@@ -133,13 +133,13 @@ export function Streaming({ onNavigate }: { onNavigate?: (page: string) => void 
              </div>
           </div>
 
-          {/* LINE 2: Digital */}
-          <div className="flex justify-center mb-6">
+          {/* LINE 2: Digital (ADDED GENEROUS SPACING HERE) */}
+          <div className="flex justify-center mt-8 mb-10">
              <span className="text-4xl md:text-6xl font-light text-zinc-300 italic">Digital</span>
           </div>
           
           {/* LINE 3: Tagline */}
-          <p className="text-orange-500 italic font-black uppercase tracking-[0.3em] text-sm md:text-xl mt-4">UNCOVER THE RARE. SHARE THE RAW.</p>
+          <p className="text-orange-500 italic font-black uppercase tracking-[0.3em] text-sm md:text-xl">UNCOVER THE RARE. SHARE THE RAW.</p>
         </div>
 
         <div className="w-full flex flex-col lg:flex-row gap-10 items-start">
