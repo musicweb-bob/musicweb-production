@@ -50,10 +50,11 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
         </span>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-6 h-20 w-full flex justify-between items-center">
+      {/* Expanded to 1600px for large desktop screens */}
+      <div className="max-w-[1600px] mx-auto px-6 h-20 w-full flex justify-between items-center">
         
-        {/* LOGOS: MUSICweb & MUSIKweb */}
-        <div onClick={() => handleNavigate('home')} className="flex items-center gap-2 cursor-pointer select-none">
+        {/* LOGOS: MUSICweb & MUSIKweb with massive right margin */}
+        <div onClick={() => handleNavigate('home')} className="flex items-center gap-2 cursor-pointer select-none mr-8 lg:mr-24 shrink-0">
           {/* MUSICweb (C Spelling) */}
           <div className="flex items-center gap-0.5">
             <span className="text-xl lg:text-2xl font-black italic text-white">MUSIC</span>
@@ -73,12 +74,12 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
         </div>
 
         {/* --- DESKTOP NAVIGATION --- */}
-        <div className="hidden lg:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-8 w-full justify-end">
           {navGroupLeft.map((item) => (
             <button
               key={item.id}
               onClick={() => handleNavigate(item.id)}
-              className={`text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:text-white ${
+              className={`text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:text-white whitespace-nowrap ${
                 currentPage === item.id ? 'text-orange-500' : 'text-zinc-300'
               }`}
             >
@@ -88,7 +89,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
 
           {/* DESKTOP MARKETPLACE DROPDOWN */}
           <div className="relative" onMouseEnter={() => setIsMarketplaceOpen(true)}>
-            <button className={`flex items-center gap-1 text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:text-white ${currentPage.includes('marketplace') ? 'text-orange-500' : 'text-zinc-300'}`}>
+            <button className={`flex items-center gap-1 text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:text-white whitespace-nowrap ${currentPage.includes('marketplace') ? 'text-orange-500' : 'text-zinc-300'}`}>
               Marketplace <ChevronDown size={12} />
             </button>
             
@@ -107,7 +108,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             <button
               key={item.id}
               onClick={() => handleNavigate(item.id)}
-              className={`text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:text-white ${
+              className={`text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:text-white whitespace-nowrap ${
                 currentPage === item.id ? 'text-orange-500' : 'text-zinc-300'
               }`}
             >
@@ -115,13 +116,13 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             </button>
           ))}
 
-          <button onClick={() => handleNavigate('admin')} className={`p-2 rounded-lg border transition-all ml-4 ${currentPage === 'admin' ? 'border-red-500 text-red-500' : 'border-zinc-800 text-zinc-500 hover:border-zinc-500 hover:text-white'}`}>
+          <button onClick={() => handleNavigate('admin')} className={`p-2 rounded-lg border transition-all ml-4 shrink-0 ${currentPage === 'admin' ? 'border-red-500 text-red-500' : 'border-zinc-800 text-zinc-500 hover:border-zinc-500 hover:text-white'}`}>
             <Lock size={14} />
           </button>
         </div>
 
         {/* MOBILE HAMBURGER BUTTON */}
-        <button className="lg:hidden text-white p-2" onClick={() => setIsMobileOpen(!isMobileOpen)}>
+        <button className="lg:hidden text-white p-2 shrink-0" onClick={() => setIsMobileOpen(!isMobileOpen)}>
           {isMobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
