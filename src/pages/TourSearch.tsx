@@ -8,6 +8,7 @@ export default function TourSearch() {
   const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
 
+  // --- SEARCH HANDLER ---
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
@@ -16,16 +17,17 @@ export default function TourSearch() {
     setHasSearched(true);
     setEvents([]);
     
-    // Calls the Proxy-enabled Brain in tourService.ts
+    // Uses the global Tour Database Sync
     try {
       const results = await fetchGlobalTours(searchQuery);
       setEvents(results);
     } catch (error) {
-      console.error("Search failed:", error);
+      console.error("Tour database search failed:", error);
     }
     setLoading(false);
   };
 
+  // --- DATE FORMATTING UTILITY ---
   const formatDate = (dateStr: string) => {
     const d = new Date(dateStr);
     return {
@@ -35,22 +37,37 @@ export default function TourSearch() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white pt-24 pb-20 px-6 font-sans relative overflow-x-hidden">
+    <div className="min-h-screen bg-black text-white pt-16 pb-20 px-6 font-sans relative overflow-x-hidden">
       <div className="fixed inset-0 bg-gradient-to-b from-zinc-900 to-black pointer-events-none"></div>
 
       <div className="relative z-10 w-full max-w-6xl mx-auto">
         
-        {/* BRANDED HEADER */}
-        <div className="text-center mb-16 flex flex-col items-center border-b border-white/5 pb-10">
-          <div className="flex items-center gap-1 mb-4">
-            <span className="text-5xl md:text-6xl font-black italic text-white tracking-tighter">MUSIC</span>
-            <span className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
-            <sup className="text-xs md:text-sm font-bold text-zinc-400">&reg;</sup>
+        {/* STANDARDIZED USPTO DUAL BRANDED HERO HEADER */}
+        <div className="text-center mb-12 flex flex-col items-center border-b border-white/5 pb-10">
+          
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-4 drop-shadow-2xl">
+             {/* MUSICweb */}
+             <div className="flex items-center select-none leading-none">
+               <span className="text-5xl md:text-7xl font-black italic text-white tracking-tighter">MUSIC</span>
+               <span className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
+               <sup className="text-xl md:text-[1.8rem] font-bold text-zinc-400 relative -ml-1 top-[-15px] md:top-[-22px]">®</sup>
+             </div>
+             
+             {/* Divider */}
+             <span className="hidden md:block text-zinc-700 text-6xl font-light pb-4">|</span>
+             
+             {/* MUSIKweb */}
+             <div className="flex items-center select-none leading-none">
+               <span className="text-5xl md:text-7xl font-black italic text-white tracking-tighter">MUSIK</span>
+               <span className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
+               <sup className="text-xl md:text-[1.8rem] font-bold text-zinc-400 relative -ml-1 top-[-15px] md:top-[-22px]">®</sup>
+             </div>
           </div>
+
           <h1 className="text-4xl md:text-5xl font-black tracking-tighter italic text-zinc-500 uppercase">TOUR EXPLORER</h1>
         </div>
 
-        {/* SEARCH BOX */}
+        {/* SEARCH CONSOLE */}
         <div className="max-w-2xl mx-auto mb-16 relative">
           <form onSubmit={handleSearch} className="group relative">
             <div className="absolute inset-0 bg-blue-500/20 blur-2xl rounded-full opacity-0 group-focus-within:opacity-100 transition-opacity pointer-events-none"></div>
@@ -71,23 +88,24 @@ export default function TourSearch() {
               {loading ? <Loader2 className="animate-spin" size={24} /> : <Search size={24} />}
             </button>
           </form>
+          
           <div className="mt-4 flex justify-center items-center gap-2 text-blue-500/60 text-[9px] font-black uppercase tracking-[0.3em]">
             <Signal size={12} className="animate-pulse" /> Live Global Sync Active
           </div>
         </div>
 
-        {/* RESULTS GRID */}
+        {/* RESULTS FEED */}
         {loading ? (
           <div className="flex flex-col items-center py-32 gap-6">
             <Loader2 className="animate-spin text-blue-500" size={64} />
-            <p className="text-zinc-500 font-black uppercase tracking-[0.4em] text-xs">Scanning Tour Databases...</p>
+            <p className="text-zinc-500 font-black uppercase tracking-[0.4em] text-xs">Scanning Global Databases...</p>
           </div>
         ) : events.length > 0 ? (
           <div className="grid gap-4 animate-in fade-in slide-in-from-bottom-10 duration-700">
             {events.map((show) => {
               const { month, day } = formatDate(show.date);
               return (
-                <div key={show.id} className="group bg-zinc-900/30 border border-white/5 p-6 md:p-8 rounded-[2.5rem] flex flex-col md:flex-row items-center gap-8 hover:bg-zinc-900/50 hover:border-white/20 transition-all backdrop-blur-sm">
+                <div key={show.id} className="group bg-zinc-900/30 border border-white/5 p-6 md:p-8 rounded-[2.5rem] flex flex-col md:flex-row items-center gap-8 hover:bg-zinc-900/50 hover:border-white/20 transition-all backdrop-blur-sm shadow-lg">
                   <div className="w-20 h-20 bg-black border border-white/10 rounded-2xl flex flex-col items-center justify-center flex-shrink-0 group-hover:border-blue-500/50 transition-colors">
                     <span className="text-[10px] font-black text-blue-500 uppercase">{month}</span>
                     <span className="text-3xl font-black">{day}</span>
@@ -116,7 +134,7 @@ export default function TourSearch() {
             })}
           </div>
         ) : hasSearched && (
-          <div className="text-center py-32 bg-zinc-900/20 rounded-[3rem] border border-dashed border-white/5">
+          <div className="text-center py-32 bg-zinc-900/20 rounded-[3rem] border border-dashed border-white/5 shadow-inner">
             <Music size={48} className="mx-auto text-zinc-800 mb-6" />
             <p className="text-zinc-500 font-black uppercase tracking-[0.3em] text-xs">No current tour dates found for this artist.</p>
           </div>
