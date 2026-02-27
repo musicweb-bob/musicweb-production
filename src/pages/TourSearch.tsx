@@ -45,7 +45,8 @@ export default function TourSearch() {
         {/* STANDARDIZED USPTO DUAL BRANDED HERO HEADER */}
         <div className="text-center mb-12 flex flex-col items-center border-b border-white/5 pb-10">
           
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-4 drop-shadow-2xl">
+          {/* Logo Container - Margin Bottom increased to mb-12 for the half-inch drop */}
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-12 drop-shadow-2xl">
              {/* MUSICweb */}
              <div className="flex items-center select-none leading-none">
                <span className="text-5xl md:text-7xl font-black italic text-white tracking-tighter">MUSIC</span>
