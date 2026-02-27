@@ -52,11 +52,24 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
 
       <div className="max-w-[1400px] mx-auto px-6 h-20 w-full flex justify-between items-center">
         
-        {/* LOGO */}
-        <div onClick={() => handleNavigate('home')} className="flex items-center gap-1 cursor-pointer select-none">
-          <span className="text-2xl font-black italic text-white">MUSIC</span>
-          <span className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600">web</span>
-          <sup className="text-[10px] font-bold text-zinc-400 relative top-0">&reg;</sup>
+        {/* LOGOS: MUSICweb & MUSIKweb */}
+        <div onClick={() => handleNavigate('home')} className="flex items-center gap-2 cursor-pointer select-none">
+          {/* MUSICweb (C Spelling) */}
+          <div className="flex items-center gap-0.5">
+            <span className="text-xl lg:text-2xl font-black italic text-white">MUSIC</span>
+            <span className="text-xl lg:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600">web</span>
+            <sup className="text-[10px] font-bold text-zinc-400 relative top-0">&reg;</sup>
+          </div>
+
+          {/* Divider */}
+          <span className="text-zinc-700 text-xl font-light pb-1">|</span>
+
+          {/* MUSIKweb (K Spelling) */}
+          <div className="flex items-center gap-0.5">
+            <span className="text-xl lg:text-2xl font-black italic text-white">MUSIK</span>
+            <span className="text-xl lg:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600">web</span>
+            <sup className="text-[10px] font-bold text-zinc-400 relative top-0">&reg;</sup>
+          </div>
         </div>
 
         {/* --- DESKTOP NAVIGATION --- */}
