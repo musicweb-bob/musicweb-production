@@ -44,7 +44,7 @@ export function Investors({ onNavigate }: InvestorsProps) {
       {/* --- ASSET GRIDS --- */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
         
-        {/* TRADEMARKS BOX - UPDATED WITH REAL 1998 SERIAL NUMBERS & CLASS 042 */}
+        {/* TRADEMARKS BOX - UPDATED WITH 1996 FIRST USE & REAL SERIALS */}
         <div className="bg-[#111] p-10 rounded-3xl border border-white/5 relative overflow-hidden group hover:border-white/10 transition-all">
           <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
             <Shield size={120} />
@@ -65,7 +65,7 @@ export function Investors({ onNavigate }: InvestorsProps) {
                 <span>®</span>
               </div>
               <p className="text-xs text-gray-400 leading-relaxed">
-                <strong className="text-white font-bold">Class 042:</strong> Computerized on-line retail services in the field of recorded music and music information. (Registered 1998)
+                <strong className="text-white font-bold">Class 042:</strong> Computerized on-line retail services in the field of recorded music and music information. (Registered 1998, first use 1996)
               </p>
             </div>
 
@@ -78,13 +78,13 @@ export function Investors({ onNavigate }: InvestorsProps) {
                 <span>®</span>
               </div>
               <p className="text-xs text-gray-400 leading-relaxed">
-                <strong className="text-white font-bold">Class 042:</strong> Defensive registration covering alternative spelling variations for on-line retail services. (Registered 1998)
+                <strong className="text-white font-bold">Class 042:</strong> Defensive registration covering alternative spelling variations for on-line retail services. (Registered 1998, first use 1996)
               </p>
             </div>
           </div>
         </div>
 
-        {/* DOMAINS BOX - RESTORED TO ORIGINAL FULL-LENGTH LAYOUT */}
+        {/* DOMAINS BOX */}
         <div className="bg-[#111] p-10 rounded-3xl border border-white/5 relative overflow-hidden group hover:border-white/10 transition-all">
           <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
             <Globe size={120} />
@@ -107,7 +107,6 @@ export function Investors({ onNavigate }: InvestorsProps) {
               <span className="font-bold text-lg">musikweb.com</span>
             </div>
             
-            {/* .net Extensions */}
             <div className="flex items-center gap-2 text-gray-400">
               <span className="text-xs font-mono ml-6 tracking-wide">.net</span>
             </div>
@@ -115,7 +114,6 @@ export function Investors({ onNavigate }: InvestorsProps) {
               <span className="text-xs font-mono ml-6 tracking-wide">.net</span>
             </div>
 
-            {/* .org Extensions */}
             <div className="flex items-center gap-2 text-gray-400">
               <span className="text-xs font-mono ml-6 tracking-wide">.org</span>
             </div>
@@ -123,7 +121,6 @@ export function Investors({ onNavigate }: InvestorsProps) {
               <span className="text-xs font-mono ml-6 tracking-wide">.org</span>
             </div>
 
-            {/* .info & Socials */}
             <div className="flex items-center gap-2 text-gray-400">
               <span className="text-xs font-mono ml-6 tracking-wide">.info</span>
             </div>
