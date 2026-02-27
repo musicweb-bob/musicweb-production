@@ -103,7 +103,7 @@ export function Streaming({ onNavigate }: { onNavigate?: (page: string) => void 
   };
 
   return (
-    <div className="min-h-screen text-white pt-28 pb-12 px-6 w-full font-sans relative">
+    <div className="min-h-screen text-white pt-12 pb-12 px-6 w-full font-sans relative">
       <div className="fixed inset-0 z-0 bg-black">
         <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=2000" className="w-full h-full object-cover opacity-30 grayscale" alt="Pro Music Studio" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/80 to-[#0a0c14]"></div>
@@ -119,7 +119,7 @@ export function Streaming({ onNavigate }: { onNavigate?: (page: string) => void 
              <div className="flex items-center select-none">
                <span className="text-5xl md:text-7xl font-black italic text-white tracking-tighter">MUSIC</span>
                <span className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
-               <sup className="text-xl md:text-3xl font-bold text-zinc-400 relative -ml-1 top-[-12px] md:top-[-18px]">&reg;</sup>
+               <sup className="text-xl md:text-3xl font-bold text-zinc-400 relative -ml-1 top-[-12px] md:top-[-18px]">®</sup>
              </div>
              
              {/* Divider */}
@@ -129,7 +129,7 @@ export function Streaming({ onNavigate }: { onNavigate?: (page: string) => void 
              <div className="flex items-center select-none">
                <span className="text-5xl md:text-7xl font-black italic text-white tracking-tighter">MUSIK</span>
                <span className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
-               <sup className="text-xl md:text-3xl font-bold text-zinc-400 relative -ml-1 top-[-12px] md:top-[-18px]">&reg;</sup>
+               <sup className="text-xl md:text-3xl font-bold text-zinc-400 relative -ml-1 top-[-12px] md:top-[-18px]">®</sup>
              </div>
           </div>
 
