@@ -34,8 +34,23 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
   };
 
   return (
-    <nav className="fixed w-full z-50 bg-black/95 backdrop-blur-xl border-b border-zinc-800" onMouseLeave={() => setIsMarketplaceOpen(false)}>
-      <div className="max-w-[1400px] mx-auto px-6 h-20 flex justify-between items-center">
+    <nav className="fixed w-full z-50 bg-black/95 backdrop-blur-xl border-b border-zinc-800 flex flex-col" onMouseLeave={() => setIsMarketplaceOpen(false)}>
+      
+      {/* --- GLOBAL BRANDING BAR FOR USPTO --- */}
+      <div className="w-full bg-[#0a0c14] border-b border-white/10 py-1.5 text-center flex justify-center items-center gap-4 z-50">
+        <span className="text-[9px] text-zinc-500 uppercase tracking-[0.2em] font-bold">
+          Global Platforms:
+        </span>
+        <span className="text-[10.5px] text-zinc-300 font-black tracking-widest">
+          MUSICweb&reg;
+        </span>
+        <span className="text-[10px] text-zinc-700">|</span>
+        <span className="text-[10.5px] text-zinc-300 font-black tracking-widest">
+          MUSIKweb&reg;
+        </span>
+      </div>
+
+      <div className="max-w-[1400px] mx-auto px-6 h-20 w-full flex justify-between items-center">
         
         {/* LOGO */}
         <div onClick={() => handleNavigate('home')} className="flex items-center gap-1 cursor-pointer select-none">
@@ -98,9 +113,9 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
         </button>
       </div>
 
-      {/* --- MOBILE NAVIGATION MENU (THE FIX) --- */}
+      {/* --- MOBILE NAVIGATION MENU --- */}
       {isMobileOpen && (
-        <div className="lg:hidden absolute top-20 left-0 w-full bg-black/95 backdrop-blur-3xl border-b border-zinc-800 flex flex-col items-center py-8 gap-6 h-[calc(100vh-80px)] overflow-y-auto">
+        <div className="lg:hidden absolute top-full left-0 w-full bg-black/95 backdrop-blur-3xl border-b border-zinc-800 flex flex-col items-center py-8 gap-6 h-[calc(100vh-100px)] overflow-y-auto">
           {navGroupLeft.map((item) => (
             <button
               key={item.id}
