@@ -111,12 +111,34 @@ export function Streaming({ onNavigate }: { onNavigate?: (page: string) => void 
 
       <div className="relative z-10 w-full">
         <div className="w-full text-center mb-16">
-          <h1 className="text-5xl md:text-7xl font-black tracking-tighter flex justify-center items-center gap-4">
-            <span className="italic text-white">MUSIC</span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600">web</span>
-            <sup className="text-xl md:text-3xl text-zinc-400">®</sup>
-            <span className="text-3xl md:text-5xl font-light text-zinc-300 italic ml-4">Digital</span>
-          </h1>
+          
+          {/* USPTO DUAL BRANDED HERO TITLE - LINE 1 */}
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-2">
+             
+             {/* MUSICweb */}
+             <div className="flex items-center select-none">
+               <span className="text-5xl md:text-7xl font-black italic text-white tracking-tighter">MUSIC</span>
+               <span className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
+               <sup className="text-xl md:text-3xl font-bold text-zinc-400 relative -ml-1 top-[-12px] md:top-[-18px]">&reg;</sup>
+             </div>
+             
+             {/* Divider */}
+             <span className="hidden md:block text-zinc-700 text-5xl md:text-6xl font-light pb-2">|</span>
+             
+             {/* MUSIKweb */}
+             <div className="flex items-center select-none">
+               <span className="text-5xl md:text-7xl font-black italic text-white tracking-tighter">MUSIK</span>
+               <span className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
+               <sup className="text-xl md:text-3xl font-bold text-zinc-400 relative -ml-1 top-[-12px] md:top-[-18px]">&reg;</sup>
+             </div>
+          </div>
+
+          {/* LINE 2: Digital */}
+          <div className="flex justify-center mb-6">
+             <span className="text-4xl md:text-6xl font-light text-zinc-300 italic">Digital</span>
+          </div>
+          
+          {/* LINE 3: Tagline */}
           <p className="text-orange-500 italic font-black uppercase tracking-[0.3em] text-sm md:text-xl mt-4">UNCOVER THE RARE. SHARE THE RAW.</p>
         </div>
 
