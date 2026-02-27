@@ -65,31 +65,50 @@ export function News() {
   const filteredNews = filter === 'ALL' ? news : news.filter(n => n.source === filter);
 
   return (
-    <div className="min-h-screen bg-black text-white pt-6 pb-12 px-6 font-sans relative overflow-x-hidden">
+    <div className="min-h-screen bg-black text-white pt-16 pb-12 px-6 font-sans relative overflow-x-hidden">
       <div className="fixed inset-0 bg-gradient-to-br from-red-900/10 via-black to-blue-900/10 pointer-events-none"></div>
+      
       <div className="relative z-10 w-full max-w-7xl mx-auto">
-        <div className="text-center mb-8 flex flex-col items-center border-b border-white/10 pb-6">
-          <div className="flex items-center gap-1 mb-6 scale-90 md:scale-100">
-            <span className="text-5xl md:text-6xl font-black italic text-white tracking-tighter">MUSIC</span>
-            <span className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
-            <sup className="text-xs md:text-sm font-bold text-zinc-400 relative top-[-15px]">&reg;</sup>
+        
+        {/* STANDARDIZED USPTO DUAL BRANDED HERO HEADER */}
+        <div className="text-center mb-12 flex flex-col items-center border-b border-white/10 pb-6">
+          
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-12 drop-shadow-2xl">
+             {/* MUSICweb */}
+             <div className="flex items-center select-none leading-none">
+               <span className="text-5xl md:text-7xl font-black italic text-white tracking-tighter">MUSIC</span>
+               <span className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
+               <sup className="text-xl md:text-[1.8rem] font-bold text-zinc-400 relative -ml-1 top-[-15px] md:top-[-22px]">®</sup>
+             </div>
+             
+             {/* Divider */}
+             <span className="hidden md:block text-zinc-700 text-6xl font-light pb-4">|</span>
+             
+             {/* MUSIKweb */}
+             <div className="flex items-center select-none leading-none">
+               <span className="text-5xl md:text-7xl font-black italic text-white tracking-tighter">MUSIK</span>
+               <span className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
+               <sup className="text-xl md:text-[1.8rem] font-bold text-zinc-400 relative -ml-1 top-[-15px] md:top-[-22px]">®</sup>
+             </div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-black tracking-tighter italic text-zinc-400 uppercase">NEWS</h1>
-          <div className="flex gap-2 overflow-x-auto mt-8 pb-2">
+
+          <h1 className="text-4xl md:text-5xl font-black tracking-tighter italic text-zinc-400 uppercase">NEWS FEED</h1>
+          
+          <div className="flex gap-2 overflow-x-auto mt-10 pb-2">
              {['ALL', 'NME', 'PITCHFORK', 'STEREOGUM'].map(src => (
                <button key={src} onClick={() => setFilter(src)} className={`px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest border transition-all ${filter === src ? 'bg-white text-black border-white' : 'bg-black text-zinc-500 border-zinc-800 hover:border-zinc-500 hover:text-white'}`}>{src}</button>
              ))}
-             <button onClick={fetchNews} className="px-4 rounded-full border border-zinc-800 text-zinc-500 hover:text-white hover:border-white transition-all">
-               <RefreshCw size={14} className={loading ? 'animate-spin' : ''} />
-             </button>
+             <button onClick={fetchNews} className="px-4 rounded-full border border-zinc-800 text-zinc-500 hover:text-white hover:border-white transition-all"><RefreshCw size={14} className={loading ? 'animate-spin' : ''} /></button>
           </div>
         </div>
+
         {usingBackup && !loading && (
           <div className="mb-8 flex items-center gap-2 text-zinc-500 text-[10px] font-bold uppercase tracking-widest">
-            <Signal size={12} className="text-orange-500" />
-            <span>Live Connection Interrupted. Viewing Archived/Demo Feed.</span>
+            <Signal size={12} className="text-orange-500 animate-pulse" />
+            <span>Live Sync Interrupted. Viewing Archived Feed.</span>
           </div>
         )}
+
         {loading ? (
           <div className="flex flex-col items-center justify-center py-40"><Loader className="animate-spin text-orange-500 mb-4" size={48} /></div>
         ) : (
@@ -105,7 +124,7 @@ export function News() {
                 <div className="flex-1 p-8 flex flex-col">
                   <div className="flex items-center gap-2 text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-3"><Clock size={12} /> {new Date(item.pubDate).toLocaleDateString()}</div>
                   <h3 className="text-xl font-black italic text-white leading-tight mb-4 group-hover:text-orange-500 line-clamp-2">{item.title}</h3>
-                  <p className="text-zinc-400 text-xs leading-relaxed line-clamp-3 mb-6 flex-1">{item.content}</p>
+                  <p className="text-zinc-400 text-xs leading-relaxed line-clamp-3 mb-6 flex-1 italic">{item.content}</p>
                   <a href={item.link} target="_blank" rel="noopener noreferrer" className="flex items-center justify-between w-full py-4 px-6 rounded-xl bg-black border border-white/5 hover:bg-white hover:text-black transition-all">
                     <span className="text-[9px] font-black uppercase tracking-[0.2em]">Read Full Story</span><ExternalLink size={14} />
                   </a>
