@@ -23,7 +23,7 @@ export function Layout() {
   return (
     <div className="min-h-screen bg-[#0a0c14] text-white">
       <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
-      <main className="pt-20">
+      <main className="pt-28">
         <Outlet />
       </main>
       <Footer />
