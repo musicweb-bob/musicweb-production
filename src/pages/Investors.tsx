@@ -7,23 +7,35 @@ interface InvestorsProps {
 
 export function Investors({ onNavigate }: InvestorsProps) {
   return (
-    <div className="min-h-screen bg-[#1a1d2e] text-white font-sans pt-10 pb-20 px-6">
+    <div className="min-h-screen bg-[#1a1d2e] text-white font-sans pt-16 pb-20 px-6">
       
-      {/* BRAND HEADER */}
-      <div className="max-w-4xl mx-auto text-center mb-6">
-        <h1 className="text-5xl md:text-6xl font-black tracking-tight flex justify-center items-start leading-none drop-shadow-2xl">
-          <span className="text-white" style={{ fontStyle: 'italic' }}>MUSIC</span>
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600">web</span>
-          <sup className="text-2xl mt-1 text-white opacity-80 -ml-2 relative top-0.5">&reg;</sup>
-        </h1>
-        <div className="w-16 h-0.5 bg-white/10 mx-auto mt-4 rounded-full"></div>
+      {/* STANDARDIZED USPTO DUAL BRANDED HERO HEADER */}
+      <div className="max-w-6xl mx-auto text-center mb-10 flex flex-col items-center">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-6 drop-shadow-2xl">
+           {/* MUSICweb */}
+           <div className="flex items-center select-none leading-none">
+             <span className="text-5xl md:text-7xl font-black italic text-white tracking-tighter">MUSIC</span>
+             <span className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
+             <sup className="text-xl md:text-[1.8rem] font-bold text-zinc-400 relative -ml-1 top-[-15px] md:top-[-22px]">®</sup>
+           </div>
+           
+           {/* Divider */}
+           <span className="hidden md:block text-zinc-700 text-6xl font-light pb-4">|</span>
+           
+           {/* MUSIKweb */}
+           <div className="flex items-center select-none leading-none">
+             <span className="text-5xl md:text-7xl font-black italic text-white tracking-tighter">MUSIK</span>
+             <span className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
+             <sup className="text-xl md:text-[1.8rem] font-bold text-zinc-400 relative -ml-1 top-[-15px] md:top-[-22px]">®</sup>
+           </div>
+        </div>
       </div>
 
       {/* --- HEADER SECTION --- */}
       <div className="max-w-4xl mx-auto text-center mb-16">
         
         {/* "OPEN FOR ACQUISITION" BADGE */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest mb-6">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest mb-8">
           <span className="relative flex h-2 w-2">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
@@ -31,12 +43,12 @@ export function Investors({ onNavigate }: InvestorsProps) {
           Open for Acquisition
         </div>
         
-        {/* MAIN TITLE */}
-        <h1 className="text-6xl md:text-7xl font-black mb-8 tracking-tight">
+        {/* MAIN TITLE - Resized to be less aggressive */}
+        <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight uppercase">
           Intellectual <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Property</span>
         </h1>
         
-        <p className="text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
+        <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
           A rare opportunity to acquire the complete <strong className="text-white" style={{ fontStyle: 'italic' }}>MUSIC</strong><span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 font-bold">web</span><sup className="text-xs text-gray-400">®</sup> and <strong className="text-white" style={{ fontStyle: 'italic' }}>MUSIK</strong><span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 font-bold">web</span><sup className="text-xs text-gray-400">®</sup> brand ecosystem.
         </p>
       </div>
@@ -44,7 +56,7 @@ export function Investors({ onNavigate }: InvestorsProps) {
       {/* --- ASSET GRIDS --- */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
         
-        {/* TRADEMARKS BOX - UPDATED WITH 1996 FIRST USE & REAL SERIALS */}
+        {/* TRADEMARKS BOX - WITH 1996 FIRST USE & REAL SERIALS */}
         <div className="bg-[#111] p-10 rounded-3xl border border-white/5 relative overflow-hidden group hover:border-white/10 transition-all">
           <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
             <Shield size={120} />
