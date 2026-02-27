@@ -42,9 +42,8 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [uploadMode, setUploadMode] = useState<'smart' | 'csv'>('smart');
 
-  // --- 1. FILTER LISTENER (RESTORED FROM 6 DAYS AGO) ---
+  // --- 1. FILTER LISTENER (Listening for Navigation Hashes) ---
   useEffect(() => {
-    // We are back to the exact system that worked: listening to Hashes
     const hash = location.hash.replace('#', '');
     
     if (hash === 'vinyl') {
@@ -58,7 +57,7 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
     } else {
       setActiveFilter(null);
     }
-  }, [location.hash]); // Triggers instantly when dropdown is clicked
+  }, [location.hash]);
 
   // --- 2. DATA FETCHING ---
   useEffect(() => {
@@ -68,7 +67,7 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
   async function fetchItems() {
     try {
       const res = await fetch(`/api/listings?t=${Date.now()}`);
-      if (!res.ok) throw new Error("Local fallback");
+      if (!res.ok) throw new Error("Local fallback required");
       const data = await res.json();
       let rawItems = Array.isArray(data) ? data : data.items || [];
       
@@ -77,7 +76,7 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
       );
       setItems(sorted);
     } catch (err) {
-      // FALLBACK TO YOUR CORE INVENTORY
+      // Fallback inventory if API is unreachable
       setItems([
         {
           id: 30,
@@ -101,7 +100,7 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
     }
   }
 
-  // --- 3. PROCESSING ENGINE (THE BRAIN) ---
+  // --- 3. PROCESSING ENGINE (Link Scouting Logic) ---
   async function processLinks(links: string[]) {
     if (!submitEmail) {
       setSubmitStatus('Error: Seller email is required for listing.');
@@ -177,7 +176,7 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
     });
   };
 
-  // --- 4. RENDER HELPERS ---
+  // --- 4. SUB-RENDER FUNCTIONS ---
   const renderSubmitForm = () => (
     <div className="space-y-4">
       <div className="text-center mb-6">
@@ -276,9 +275,10 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
 
   // --- 5. MAIN RENDER ---
   return (
-    <div className="min-h-screen bg-black text-white pt-32 pb-24 px-8 relative w-full selection:bg-purple-500/30">
-      {/* --- HEADER ACTIONS --- */}
-      <div className="absolute top-28 right-8 z-50 flex gap-3">
+    <div className="min-h-screen bg-black text-white pt-16 pb-24 px-8 relative w-full selection:bg-purple-500/30">
+      
+      {/* --- FLOATING FILTER CLEAR BUTTON --- */}
+      <div className="absolute top-24 right-8 z-50 flex gap-3">
         {activeFilter && (
           <button 
             onClick={() => { onNavigate('marketplace'); setActiveFilter(null); }} 
@@ -289,14 +289,30 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
         )}
       </div>
 
-      {/* --- HERO LOGO --- */}
+      {/* --- STANDARDIZED USPTO DUAL BRANDED HERO --- */}
       <div className="w-full text-center mb-16 select-none">
-        <h1 className="text-6xl md:text-8xl font-black tracking-tighter flex justify-center items-start leading-none drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-          <span className="text-white italic">MUSIC</span>
-          <span className="text-transparent bg-clip-text bg-gradient-to-br from-orange-400 via-pink-500 to-purple-600">web</span>
-          <sup className="text-3xl mt-4 text-white/40 ml-1 relative top-2">&reg;</sup>
-        </h1>
-        <div className="w-24 h-1.5 bg-gradient-to-r from-orange-600 to-purple-600 mx-auto mt-6 rounded-full shadow-[0_0_20px_rgba(168,85,247,0.4)]"></div>
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-6 drop-shadow-2xl">
+           
+           {/* MUSICweb */}
+           <div className="flex items-center select-none leading-none">
+             <span className="text-5xl md:text-7xl font-black italic text-white tracking-tighter">MUSIC</span>
+             <span className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
+             <sup className="text-xl md:text-[1.8rem] font-bold text-zinc-400 relative -ml-1 top-[-15px] md:top-[-22px]">®</sup>
+           </div>
+           
+           {/* Divider */}
+           <span className="hidden md:block text-zinc-700 text-6xl font-light pb-4">|</span>
+           
+           {/* MUSIKweb */}
+           <div className="flex items-center select-none leading-none">
+             <span className="text-5xl md:text-7xl font-black italic text-white tracking-tighter">MUSIK</span>
+             <span className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
+             <sup className="text-xl md:text-[1.8rem] font-bold text-zinc-400 relative -ml-1 top-[-15px] md:top-[-22px]">®</sup>
+           </div>
+        </div>
+        
+        {/* UNDERLINE ACCENT */}
+        <div className="w-24 h-1.5 bg-gradient-to-r from-orange-600 to-purple-600 mx-auto rounded-full shadow-[0_0_20px_rgba(168,85,247,0.4)]"></div>
       </div>
 
       <div className="w-full flex flex-col lg:flex-row gap-16 items-start max-w-[1800px] mx-auto">
@@ -383,7 +399,7 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
         </div>
       </div>
 
-      {/* --- MOBILE INTERFACE --- */}
+      {/* --- MOBILE SUBMISSION INTERFACE --- */}
       <button 
         onClick={() => setIsMobileModalOpen(true)}
         className="lg:hidden fixed bottom-8 right-8 z-50 bg-gradient-to-br from-orange-500 to-purple-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-[0_10px_40px_rgba(168,85,247,0.5)] hover:scale-110 active:scale-95 transition-all"
