@@ -151,18 +151,32 @@ export function Artists({ onNavigate: _onNavigate }: { onNavigate?: (page: strin
   };
 
   return (
-    <div className="min-h-screen bg-black text-white pt-6 pb-12 px-6 w-full font-sans relative overflow-x-hidden">
+    <div className="min-h-screen bg-black text-white pt-16 pb-12 px-6 w-full font-sans relative overflow-x-hidden">
       
       <div className="fixed inset-0 bg-gradient-to-b from-zinc-900 to-black pointer-events-none"></div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto">
         
-        {/* HEADER */}
-        <div className="text-center mb-8 flex flex-col items-center">
-          <div className="flex items-center gap-1 cursor-default select-none mb-6 scale-90 md:scale-100">
-            <span className="text-5xl md:text-6xl font-black italic text-white tracking-tighter">MUSIC</span>
-            <span className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
-            <sup className="text-xs md:text-sm font-bold text-zinc-400 relative top-[-15px]">&reg;</sup>
+        {/* STANDARDIZED USPTO DUAL BRANDED HERO HEADER */}
+        <div className="text-center mb-12 flex flex-col items-center">
+          
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-12 drop-shadow-2xl">
+             {/* MUSICweb Component */}
+             <div className="flex items-center select-none leading-none">
+               <span className="text-5xl md:text-7xl font-black italic text-white tracking-tighter">MUSIC</span>
+               <span className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
+               <sup className="text-xl md:text-[1.8rem] font-bold text-zinc-400 relative -ml-1 top-[-15px] md:top-[-22px]">®</sup>
+             </div>
+             
+             {/* Unified Divider Bar */}
+             <span className="hidden md:block text-zinc-700 text-6xl font-light pb-4">|</span>
+             
+             {/* MUSIKweb Component */}
+             <div className="flex items-center select-none leading-none">
+               <span className="text-5xl md:text-7xl font-black italic text-white tracking-tighter">MUSIK</span>
+               <span className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
+               <sup className="text-xl md:text-[1.8rem] font-bold text-zinc-400 relative -ml-1 top-[-15px] md:top-[-22px]">®</sup>
+             </div>
           </div>
 
           <h1 className="text-4xl md:text-5xl font-black tracking-tighter flex justify-center items-center gap-3 leading-none drop-shadow-2xl">
@@ -174,7 +188,7 @@ export function Artists({ onNavigate: _onNavigate }: { onNavigate?: (page: strin
           </p>
         </div>
 
-        {/* --- SPOTLIGHT --- */}
+        {/* --- SPOTLIGHT (Preserved Original Feature) --- */}
         {!currentData && searchResults.length === 0 && (
           <div className="mb-20">
             <h2 className="text-sm font-black text-zinc-500 uppercase tracking-widest mb-8 border-l-4 border-blue-500 pl-4">
@@ -202,7 +216,7 @@ export function Artists({ onNavigate: _onNavigate }: { onNavigate?: (page: strin
           </div>
         )}
 
-        {/* --- SEARCH --- */}
+        {/* --- SEARCH (Preserved Original Logic) --- */}
         <div className="max-w-3xl mx-auto mb-12">
           <form onSubmit={handleSearch} className="relative group">
             <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-zinc-300 group-focus-within:text-blue-500 transition-colors" size={24} />
