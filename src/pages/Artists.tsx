@@ -50,12 +50,11 @@ export function Artists({ onNavigate: _onNavigate }: { onNavigate?: (page: strin
     if (!query) return;
     setLoading(true);
     setError('');
-    setSearchResults([]); // Clear any previous dropdown lists
+    setSearchResults([]); 
     
     try {
       const summaryRes = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(query)}`);
       
-      // If not an exact match, try to get a list of options
       if (!summaryRes.ok) {
         await fetchSearchList(query);
         setLoading(false);
@@ -64,7 +63,6 @@ export function Artists({ onNavigate: _onNavigate }: { onNavigate?: (page: strin
       
       const summaryData = await summaryRes.json();
 
-      // If Wikipedia throws a disambiguation warning, get a list of options
       if (summaryData.type === 'disambiguation') {
         await fetchSearchList(query);
         setLoading(false);
@@ -161,17 +159,14 @@ export function Artists({ onNavigate: _onNavigate }: { onNavigate?: (page: strin
         <div className="text-center mb-12 flex flex-col items-center">
           
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-12 drop-shadow-2xl">
-             {/* MUSICweb Component */}
              <div className="flex items-center select-none leading-none">
                <span className="text-5xl md:text-7xl font-black italic text-white tracking-tighter">MUSIC</span>
                <span className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
                <sup className="text-xl md:text-[1.8rem] font-bold text-zinc-400 relative -ml-1 top-[-15px] md:top-[-22px]">®</sup>
              </div>
              
-             {/* Unified Divider Bar */}
              <span className="hidden md:block text-zinc-700 text-6xl font-light pb-4">|</span>
              
-             {/* MUSIKweb Component */}
              <div className="flex items-center select-none leading-none">
                <span className="text-5xl md:text-7xl font-black italic text-white tracking-tighter">MUSIK</span>
                <span className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 tracking-tighter">web</span>
@@ -188,7 +183,26 @@ export function Artists({ onNavigate: _onNavigate }: { onNavigate?: (page: strin
           </p>
         </div>
 
-        {/* --- SPOTLIGHT (Preserved Original Feature) --- */}
+        {/* --- REPOSITIONED SEARCH BOX (Sit between Artist Explorer and Trending) --- */}
+        {!currentData && searchResults.length === 0 && (
+          <div className="max-w-3xl mx-auto mb-16">
+            <form onSubmit={handleSearch} className="relative group">
+              <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-zinc-300 group-focus-within:text-blue-500 transition-colors" size={24} />
+              <input 
+                type="text" 
+                placeholder="Search Global Database (e.g. 'Pink Floyd')..." 
+                className="w-full bg-zinc-900/80 border-2 border-white/30 p-6 pl-16 rounded-[2rem] text-lg text-white outline-none focus:border-blue-500 transition-all font-black placeholder-zinc-400 shadow-[0_0_30px_rgba(255,255,255,0.05)] backdrop-blur-xl"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <button type="submit" className="absolute right-4 top-1/2 -translate-y-1/2 bg-white text-black p-3 rounded-full hover:bg-blue-500 hover:text-white transition-all">
+                <ArrowRight size={20} />
+              </button>
+            </form>
+          </div>
+        )}
+
+        {/* --- SPOTLIGHT --- */}
         {!currentData && searchResults.length === 0 && (
           <div className="mb-20">
             <h2 className="text-sm font-black text-zinc-500 uppercase tracking-widest mb-8 border-l-4 border-blue-500 pl-4">
@@ -216,24 +230,7 @@ export function Artists({ onNavigate: _onNavigate }: { onNavigate?: (page: strin
           </div>
         )}
 
-        {/* --- SEARCH (Preserved Original Logic) --- */}
-        <div className="max-w-3xl mx-auto mb-12">
-          <form onSubmit={handleSearch} className="relative group">
-            <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-zinc-300 group-focus-within:text-blue-500 transition-colors" size={24} />
-            <input 
-              type="text" 
-              placeholder="Search Global Database (e.g. 'Pink Floyd')..." 
-              className="w-full bg-zinc-900/80 border-2 border-white/30 p-6 pl-16 rounded-[2rem] text-lg text-white outline-none focus:border-blue-500 transition-all font-black placeholder-zinc-400 shadow-[0_0_30px_rgba(255,255,255,0.05)] backdrop-blur-xl"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <button type="submit" className="absolute right-4 top-1/2 -translate-y-1/2 bg-white text-black p-3 rounded-full hover:bg-blue-500 hover:text-white transition-all">
-              <ArrowRight size={20} />
-            </button>
-          </form>
-        </div>
-
-        {/* --- MULTIPLE RESULTS DROPDOWN LIST --- */}
+        {/* --- MULTIPLE RESULTS DROPDOWN --- */}
         {searchResults.length > 0 && !currentData && !loading && (
           <div className="max-w-3xl mx-auto mb-12 animate-in fade-in slide-in-from-top-4">
             <h3 className="text-sm font-black text-zinc-500 uppercase tracking-widest mb-4 border-l-4 border-orange-500 pl-4">
@@ -276,6 +273,22 @@ export function Artists({ onNavigate: _onNavigate }: { onNavigate?: (page: strin
         {/* --- FULL ARTICLE VIEWER --- */}
         {currentData && !loading && (
           <div className="max-w-5xl mx-auto animate-in fade-in slide-in-from-bottom-10 duration-500 pb-20">
+            {/* Search Box also appears here when viewing an article for easy navigation */}
+            <div className="max-w-3xl mx-auto mb-12">
+              <form onSubmit={handleSearch} className="relative group">
+                <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-zinc-300 group-focus-within:text-blue-500 transition-colors" size={24} />
+                <input 
+                  type="text" 
+                  className="w-full bg-zinc-900/80 border-2 border-white/30 p-6 pl-16 rounded-[2rem] text-lg text-white outline-none focus:border-blue-500 transition-all font-black placeholder-zinc-400 shadow-[0_0_30px_rgba(255,255,255,0.05)] backdrop-blur-xl"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button type="submit" className="absolute right-4 top-1/2 -translate-y-1/2 bg-white text-black p-3 rounded-full hover:bg-blue-500 hover:text-white transition-all">
+                  <ArrowRight size={20} />
+                </button>
+              </form>
+            </div>
+
             <div className="bg-zinc-900/80 backdrop-blur-3xl rounded-[3rem] border border-white/10 shadow-[0_0_100px_rgba(0,0,0,0.8)] overflow-hidden">
               <div className="relative h-64 md:h-80 w-full">
                 {currentData.thumbnail ? (
@@ -327,6 +340,7 @@ export function Artists({ onNavigate: _onNavigate }: { onNavigate?: (page: strin
                 `}</style>
                 <div ref={contentRef} className="wiki-content prose prose-invert prose-lg max-w-none prose-headings:font-black prose-headings:italic prose-headings:uppercase prose-headings:text-white prose-p:text-zinc-300 prose-p:leading-relaxed prose-li:text-zinc-300" dangerouslySetInnerHTML={{ __html: currentData.extract }} />
               </div>
+              {/* REMINDER: Integrate JamBase API in tourService.ts for Tickets/Concerts */}
               <div className="bg-black/50 p-6 text-center border-t border-white/5">
                 <p className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest">Content sourced via Wikipedia API. Data cleared upon close.</p>
               </div>
