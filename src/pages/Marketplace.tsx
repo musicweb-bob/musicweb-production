@@ -290,9 +290,9 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
       </div>
 
       {/* --- STANDARDIZED USPTO DUAL BRANDED HERO --- */}
-      <div className="w-full text-center mb-16 select-none">
-        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-6 drop-shadow-2xl">
-           
+      <div className="w-full text-center mb-16 select-none border-b border-white/5 pb-10">
+        
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-8 drop-shadow-2xl">
            {/* MUSICweb */}
            <div className="flex items-center select-none leading-none">
              <span className="text-5xl md:text-7xl font-black italic text-white tracking-tighter">MUSIC</span>
@@ -311,8 +311,8 @@ export function Marketplace({ onNavigate, initialFilter }: MarketplaceProps) {
            </div>
         </div>
         
-        {/* UNDERLINE ACCENT */}
-        <div className="w-24 h-1.5 bg-gradient-to-r from-orange-600 to-purple-600 mx-auto rounded-full shadow-[0_0_20px_rgba(168,85,247,0.4)]"></div>
+        {/* THE NEW MARKETPLACE SUBTITLE */}
+        <h1 className="text-4xl md:text-5xl font-black tracking-tighter italic text-zinc-400 uppercase">MARKETPLACE</h1>
       </div>
 
       <div className="w-full flex flex-col lg:flex-row gap-16 items-start max-w-[1800px] mx-auto">
