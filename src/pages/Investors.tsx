@@ -56,7 +56,7 @@ export function Investors({ onNavigate }: InvestorsProps) {
       {/* --- ASSET GRIDS --- */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
         
-        {/* TRADEMARKS BOX - MINIMALIST PREMIUM DESIGN */}
+        {/* TRADEMARKS BOX */}
         <div className="bg-[#111] p-10 rounded-3xl border border-white/5 relative overflow-hidden group hover:border-white/10 transition-all">
           <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
             <Shield size={120} />
@@ -79,7 +79,7 @@ export function Investors({ onNavigate }: InvestorsProps) {
                 <span>®</span>
               </div>
               <p className="text-sm text-zinc-400 font-medium tracking-wide">
-                <span className="text-white font-bold">Vintage: 1995</span> <span className="opacity-60 italic">(First Use: 1994)</span>
+                <span className="text-white font-bold">Vintage: 1998</span> <span className="opacity-60 italic">(First Use: 1996)</span>
               </p>
             </div>
 
@@ -94,7 +94,7 @@ export function Investors({ onNavigate }: InvestorsProps) {
                 <span>®</span>
               </div>
               <p className="text-sm text-zinc-400 font-medium tracking-wide">
-                <span className="text-white font-bold">Vintage: 1996</span> <span className="opacity-60 italic">(First Use: 1995)</span>
+                <span className="text-white font-bold">Vintage: 1997</span> <span className="opacity-60 italic">(First Use: 1996)</span>
               </p>
             </div>
           </div>
@@ -141,6 +141,17 @@ export function Investors({ onNavigate }: InvestorsProps) {
               <span className="text-xs font-mono ml-6 tracking-wide">.info</span>
             </div>
             <div className="flex items-center gap-2 text-gray-400">
+              <span className="text-xs font-mono ml-6 tracking-wide">.info</span>
+            </div>
+
+            <div className="flex items-center gap-2 text-gray-400">
+              <span className="text-xs font-mono ml-6 tracking-wide">.us</span>
+            </div>
+            <div className="flex items-center gap-2 text-gray-400">
+              <span className="text-xs font-mono ml-6 tracking-wide">.us</span>
+            </div>
+
+            <div className="col-span-2 flex items-center gap-2 text-gray-500 mt-2">
               <span className="text-xs font-mono ml-6 tracking-wide">+ Social Handles</span>
             </div>
           </div>
