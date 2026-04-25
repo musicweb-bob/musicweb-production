@@ -79,7 +79,7 @@ export function Investors({ onNavigate }: InvestorsProps) {
                 <span>®</span>
               </div>
               <p className="text-sm text-zinc-400 font-medium tracking-wide">
-                <span className="text-white font-bold">Vintage: 1998</span> <span className="opacity-60 italic">(First Use: 1996)</span>
+                <span className="text-white font-bold">Vintage: 1998</span> <span className="opacity-60 italic">(First Use: 1995)</span>
               </p>
             </div>
 
