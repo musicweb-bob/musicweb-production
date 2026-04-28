@@ -5,6 +5,17 @@
       "source": "/(.*)\\.(asp|htm|html)",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "musicweb.com"
+        }
+      ],
+      "destination": "https://www.musicweb.com/:path*",
+      "permanent": true
     }
   ],
   "rewrites": [
